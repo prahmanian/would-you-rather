@@ -7,17 +7,24 @@ import {
     NavBtn,
     NavBtnLink,
     Logo,
-    Close
+    Close,
+    Welcome,
+    // LogoutBtn
 } from './NavbarElements';
-import {MdCompareArrows} from 'react-icons/md'
+import UserImage from '../UserImage'
+// import {MdCompareArrows} from 'react-icons/md'
 import Dropdown from './Dropdown';
 
 
-const Navbar = () => {
+const Navbar = (props) => {
     const [isOpen, setIsOpen] =  useState(false)
     const toggle = () => {
         setIsOpen(!isOpen);
     }
+
+    const user = props.user
+    // console.log("user obj:", user)
+
     return (
         <>
             <Nav>
@@ -27,22 +34,35 @@ const Navbar = () => {
                     {isOpen ? <Logo onClick={toggle}/> : <Logo /> }
                 </NavLink>
 
-                {/* <Bars /> */}
                 {isOpen ? <Close onClick={toggle}/> : <Bars onClick={toggle}/>}
 
-                {/* {isOpen && <Dropdown isOpen={isOpen} toggle={toggle}/>} */}
-                <Dropdown isOpen={isOpen} toggle={toggle}/>
+                <Dropdown isOpen={isOpen} toggle={toggle} user={user}/>
 
                 <NavMenu>
                     <NavLink to="/home" activeStyle> Home </NavLink>
                     <NavLink to="/add" activeStyle> New Question </NavLink>
                     <NavLink to="/leaderboard" activeStyle> Leader Board </NavLink>
-                    <NavLink to="/login" activeStyle> Login </NavLink>
+                    {/* <NavLink to="/login" activeStyle> Login </NavLink> */}
                 </NavMenu>
 
-                <NavBtn>
-                    <NavBtnLink to="/login">Login</NavBtnLink>
-                </NavBtn>
+                <div>
+                    {user
+                        ?   <Welcome>
+                                <p>Hello, {user.name}!</p>
+                                <UserImage user={user} size={"34px"} />
+
+                                <NavBtnLink to="/login">Log Out</NavBtnLink>
+
+                            </Welcome>
+
+                        :   <NavBtn>
+                                <NavBtnLink to="/login">Login</NavBtnLink>
+                            </NavBtn>
+                        
+                    }
+                </div>
+
+                
 
             </Nav>
         </>

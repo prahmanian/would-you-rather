@@ -99,7 +99,7 @@ export const NavBtn = styled.nav`
 `
 
 export const NavBtnLink = styled(Link)`
-    border-radius: 4px;
+    border-radius: 40px;
     background: #256ce1;
     padding: 10px 22px;
     color: #fff;
@@ -113,5 +113,38 @@ export const NavBtnLink = styled(Link)`
         transition: all 0.2s ease-in-out;
         background: #fff;
         color: #010606
+    }
+`
+
+export const Welcome = styled.div`
+    color: white;
+    display: inline-flex;
+    width: 400px;
+    height: 100%;
+
+    align-items: center;
+    /* margin-right: -24px; */
+    justify-content: space-between;
+    padding: 10px 22px;
+
+
+    white-space: nowrap;
+
+    @media screen and (Max-width: 768px) {
+        display: none;
+    }
+
+`
+
+export const LogoutBtn = styled.button`
+    display: flex;
+    align-items: center;
+    margin-right: 24px;
+
+    justify-content: flex-end;
+    width: 100vw;
+
+    @media screen and (Max-width: 768px) {
+        display: none;
     }
 `
