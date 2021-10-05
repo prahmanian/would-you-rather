@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { NavLink as Link } from 'react-router-dom'
-import {FaBars} from 'react-icons/fa'
+import {FaBars, FaTimes} from 'react-icons/fa'
+
 import {MdCompareArrows} from 'react-icons/md'
 
 export const Nav = styled.nav`
@@ -10,7 +11,7 @@ export const Nav = styled.nav`
     /* justify-content: space-between; */
     justify-content: flex-start;
     padding: 0.5rem calc((100vw - 1000px) / 2);
-    z-index: 10;
+    z-index: 1000;
 
 `
 
@@ -31,6 +32,23 @@ export const NavLink = styled(Link)`
 export const Bars =styled(FaBars)`
     display: none;
     color: #fff;
+    z-index: 10000;
+
+    @media screen and (max-width: 768px) {
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        transform: translate(-100%, 75%);
+        font-size: 1.8rem;
+        cursor: pointer;
+    }
+`
+
+export const Close =styled(FaTimes)`
+    display: none;
+    color: #fff;
+    z-index: 10000;
 
     @media screen and (max-width: 768px) {
         display: block;
@@ -49,6 +67,7 @@ export const Logo =styled(MdCompareArrows)`
     font-size: 4rem;
     top: 0;
     right: 0;
+    z-index: 1000;
     cursor: pointer;
 `
 

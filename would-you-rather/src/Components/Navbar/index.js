@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
     Nav,
     NavLink,
@@ -6,23 +6,32 @@ import {
     NavMenu,
     NavBtn,
     NavBtnLink,
-    Logo
+    Logo,
+    Close
 } from './NavbarElements';
 import {MdCompareArrows} from 'react-icons/md'
+import Dropdown from './Dropdown';
 
 
 const Navbar = () => {
+    const [isOpen, setIsOpen] =  useState(false)
+    const toggle = () => {
+        setIsOpen(!isOpen);
+    }
     return (
         <>
             <Nav>
                 {/* This is the Logo */}
-                <NavLink to="/">
+                <NavLink to="/" >
                     {/* <img src={require('../../images/GutenMade-Logo-White.png')} alt="logo" /> */}
-                    {/* <MdCompareArrows  size="xlarge"/> */}
-                    <Logo />
+                    {isOpen ? <Logo onClick={toggle}/> : <Logo /> }
                 </NavLink>
 
                 {/* <Bars /> */}
+                {isOpen ? <Close onClick={toggle}/> : <Bars onClick={toggle}/>}
+
+                {/* {isOpen && <Dropdown isOpen={isOpen} toggle={toggle}/>} */}
+                <Dropdown isOpen={isOpen} toggle={toggle}/>
 
                 <NavMenu>
                     <NavLink to="/home" activeStyle> Home </NavLink>
