@@ -23,7 +23,7 @@ class UserImage extends Component {
       const name = this.props.user.name
       const round = this.props.round ? this.props.round : true
       
-      console.log("user", this.props.user)
+      // console.log("user", this.props.user)
   
       return (
         <Avatar name={name} src={image} round={round} size={size} textSizeRatio={2.25}/>

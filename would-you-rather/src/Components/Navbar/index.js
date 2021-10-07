@@ -39,10 +39,14 @@ const Navbar = (props) => {
                 <Dropdown isOpen={isOpen} toggle={toggle} user={user}/>
 
                 <NavMenu>
-                    <NavLink to="/home" activeStyle> Home </NavLink>
+                    {/* <NavLink to="/home" activeStyle> Home </NavLink>
                     <NavLink to="/add" activeStyle> New Question </NavLink>
-                    <NavLink to="/leaderboard" activeStyle> Leader Board </NavLink>
+                    <NavLink to="/leaderboard" activeStyle> Leader Board </NavLink> */}
                     {/* <NavLink to="/login" activeStyle> Login </NavLink> */}
+
+                    <NavLink to="/home" > Home </NavLink>
+                    <NavLink to="/add" > New Question </NavLink>
+                    <NavLink to="/leaderboard" > Leader Board </NavLink>
                 </NavMenu>
 
                 <div>
