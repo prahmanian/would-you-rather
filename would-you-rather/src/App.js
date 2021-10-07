@@ -3,7 +3,8 @@ import './App.css';
 import {users} from './starter/_DATA'
 import Navbar from './components/Navbar';
 // import Login from './components/Login';
-import Leaderboard from './components/Leaderboard'
+// import Leaderboard from './components/Leaderboard'
+import AddQuestion from './components/AddQuestion'
 
 
 function App() {
@@ -18,7 +19,8 @@ function App() {
 
       {/* <Login /> */}
 
-      <Leaderboard users={users} />
+      {/* <Leaderboard users={users} /> */}
+      <AddQuestion />
     </div>
   );
 }
