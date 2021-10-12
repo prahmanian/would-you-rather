@@ -4,7 +4,8 @@ import {users} from './starter/_DATA'
 import Navbar from './components/Navbar';
 // import Login from './components/Login';
 // import Leaderboard from './components/Leaderboard'
-import AddQuestion from './components/AddQuestion'
+// import AddQuestion from './components/AddQuestion'
+import Question from './components/Question'
 
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
       {/* <Login /> */}
 
       {/* <Leaderboard users={users} /> */}
-      <AddQuestion />
+      <Question />
     </div>
   );
 }
