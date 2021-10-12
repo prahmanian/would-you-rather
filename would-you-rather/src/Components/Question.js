@@ -182,7 +182,7 @@ const Select = styled.label`
 `
 
 
-class AddQuestion extends Component {
+class Question extends Component {
 
     // static propTypes = {
     //     user: PropTypes.object.isRequired,
@@ -302,7 +302,7 @@ class AddQuestion extends Component {
 }
 
 
-export default AddQuestion
+export default Question
 
 
 
