@@ -5,7 +5,8 @@ import Navbar from './components/Navbar';
 // import Login from './components/Login';
 // import Leaderboard from './components/Leaderboard'
 // import AddQuestion from './components/AddQuestion'
-import Question from './components/Question'
+// import Question from './components/Question'
+import Dashboard from './components/Dashboard'
 
 
 function App() {
@@ -21,7 +22,8 @@ function App() {
       {/* <Login /> */}
 
       {/* <Leaderboard users={users} /> */}
-      <Question />
+      {/* <Question /> */}
+      <Dashboard authUser={users.sarahedo} />
     </div>
   );
 }
