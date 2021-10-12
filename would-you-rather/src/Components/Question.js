@@ -2,42 +2,13 @@ import React, { Component } from 'react'
 // import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { NavLink as Link } from 'react-router-dom'
-import LeaderboardUser from "./LeaderboardUser"
 import {users} from '../starter/_DATA'
 import {questions} from '../starter/_DATA'
-import { ImageWrapper, HR2 as HR } from './sharedElements'
+import { ImageWrapper, HR2 as HR, DetailsWrapper, Label , BottomWrapper} from './sharedElements'
 import UserImage from './UserImage'
-import { FaBarcode } from 'react-icons/fa'
 import {ResultsBar} from './sharedElements'
 
 
-
-const QuestionWrapper = styled.div`
-    display: flex;
-    flex-direction: row;
-    width: 500px;
-    border: 1px solid lightgrey;
-    border-radius: 0 0 10px 10px;
-    /* padding: 10px; */
-    margin: 0 auto;
-    position: relative;
-    border-top: 0px;
-    text-align: left;
-    
-`
-
-const Label = styled.div`
-    display: block;
-    width: 500px;
-    border: 1px solid lightgrey;
-    border-radius: 10px 10px 0px 0px;
-    padding: 10px;
-    margin: 15px auto 0;
-    position: relative;
-    top: 0;
-    background: lightgrey;
-    
-`
 
 const Container = styled.div`
     display: flex;
@@ -105,24 +76,6 @@ const Button = styled.button`
         background: lightgreen;
         color: #010606
     }
-`
-const DetailsWrapper = styled.div`
-    display: flex;
-    background: transparent;
-    color: grey;
-    width: 350x;
-    /* height: 120px; */
-    /* font-size: 2rem; */
-    align-content: center;
-    justify-content: space-between;
-    /* padding: 5px; */
-    border-left : 1px solid lightgray;
-    /* border-right : 1px solid lightgray; */
-    /* border-radius: 5px 5px 5px 5px; */
-    /* overflow: hidden; */
-    margin: 10px 5px;
-    flex-direction: column;
-    padding: 0 5px 0px 10px;
 `
 
 
@@ -235,7 +188,7 @@ class Question extends Component {
                     }
                 </Label>
 
-                <QuestionWrapper>
+                <BottomWrapper>
 
                     <ImageWrapper>
                         <UserImage user={tempUser} size={"120px"}/>
@@ -294,7 +247,7 @@ class Question extends Component {
 
                     
 
-                </QuestionWrapper>
+                </BottomWrapper>
 
             </>
         )

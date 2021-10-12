@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import UserImage from './UserImage'
 import styled from 'styled-components'
+import { ImageWrapper, HR } from './sharedElements'
 
 
 const LeaderboardUserWrapper = styled.div`
@@ -94,11 +95,7 @@ const DetailsWrapper = styled.div`
     padding: 10px;
 `
 
-const HR = styled.hr`
-    background-color: lightgrey;
-    height: 1px;
-    border-width: 0px;
-`
+
 
 const Flag = styled.div`
     clip-path: polygon(0% 0%, 100% 0%, 0% 100%, 0% 0%);
@@ -126,9 +123,9 @@ const DetailLine = styled.div`
     /* padding: 5px; */
     width: 100%;
 `
-const ImageWrapper = styled.div`
-    margin: auto;
-`
+// const ImageWrapper = styled.div`
+//     margin: auto;
+// `
 
 class LeaderboardUser extends Component {
 

@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
 // import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { NavLink as Link } from 'react-router-dom'
-
-import {users} from '../starter/_DATA'
 import {questions} from '../starter/_DATA'
+import QuestionPreview from './QuestionPreview'
 
-import Question from './Question'
+
 
 const StyledDashboard = styled.div`
     /* background: palegoldenrod; */
@@ -31,6 +29,7 @@ const StyledDashboard = styled.div`
         margin: 10px;
     }
 `
+
 const Button = styled.button`
     width: 50%;
     height: 2.5rem;
@@ -44,6 +43,7 @@ const Button = styled.button`
     transition: all 0.2s ease-in-out;
     text-decoration: none;
     overflow: hidden;
+    font-weight: bolder;
 
     &:hover {
         transition: all 0.2s ease-in-out;
@@ -121,10 +121,9 @@ export default class Dashboard extends Component {
                     
                     <ul>
                         {/* {Object.keys(questions).filter((id) => Object.keys(tempUser.answers).includes(id))} */}
-                        {filteredQuestions.map((id) => (<li key={id}><Question></Question>{id}</li>))}
+                        {filteredQuestions.map((id) => (<li key={id}><QuestionPreview id={id}></QuestionPreview></li>))}
 
                     </ul>
-                    <p>{tempUser.name}</p>
 
                     
 

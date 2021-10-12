@@ -201,4 +201,4 @@ export function _saveQuestionAnswer ({ authedUser, qid, answer }) {
   })
 }
 
-export {users}
+export {users, questions}
