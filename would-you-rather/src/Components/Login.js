@@ -76,8 +76,20 @@ const StyledSelect = styled(Select)`
 
 
 class Login extends Component {
+    state = { selectedUser: null }
+    
+    handleChange = (selectedUser) => {
+        this.setState({selectedUser: selectedUser.value});
+        console.log('new selected user: ', selectedUser.value)
+    }
+
+    handleSubmit = (e) => {
+        alert('user: ' + this.state.selectedUser)
+        e.preventDefault()
+    }
 
     render () {
+
         const options = []
 
         for (const [user_id, user_obj] of Object.entries(users)) {
@@ -101,9 +113,10 @@ class Login extends Component {
 
                     <strong>Please sign in to play the game.</strong>
 
-                    <StyledSelect options={options} className="react-select-container" classNamePrefix='react-select' />
 
-                    <Button>Sign In</Button>
+                    <StyledSelect  onChange={this.handleChange} id="login" options={options} className="react-select-container" classNamePrefix='react-select' />
+
+                    <Button onClick={this.handleSubmit} >Sign In</Button>
 
                 </BottomWrapperColumn>            
             </LoginWrapper>
