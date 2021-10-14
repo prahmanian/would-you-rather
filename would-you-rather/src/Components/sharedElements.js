@@ -64,6 +64,20 @@ export const BottomWrapper = styled.div`
 
 `
 
+export const BottomWrapperColumn = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    border: 1px solid lightgrey;
+    border-radius: 0 0 10px 10px;
+    /* padding: 10px; */
+    margin: 0 auto;
+    position: relative;
+    border-top: 0px;
+    text-align: left;
+
+`
+
 
 export class ResultsBar extends Component {
     render () {

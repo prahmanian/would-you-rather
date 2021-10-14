@@ -2,11 +2,11 @@ import './App.css';
 // import UserImage from './components/UserImage'
 import {users} from './starter/_DATA'
 import Navbar from './components/Navbar';
-// import Login from './components/Login';
+import Login from './components/Login';
 // import Leaderboard from './components/Leaderboard'
 // import AddQuestion from './components/AddQuestion'
 // import Question from './components/Question'
-import Dashboard from './components/Dashboard'
+// import Dashboard from './components/Dashboard'
 
 
 function App() {
@@ -19,11 +19,11 @@ function App() {
       <UserImage user={users.sarahedo}/>
       <UserImage user={users.johndoe} /> */}
 
-      {/* <Login /> */}
+      <Login />
 
       {/* <Leaderboard users={users} /> */}
       {/* <Question /> */}
-      <Dashboard authUser={users.sarahedo} />
+      {/* <Dashboard authUser={users.sarahedo} /> */}
     </div>
   );
 }

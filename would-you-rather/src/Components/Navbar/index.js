@@ -14,6 +14,7 @@ import {
 import UserImage from '../UserImage'
 // import {MdCompareArrows} from 'react-icons/md'
 import Dropdown from './Dropdown';
+import gamelogo from '../../images/logo.png'
 
 
 const Navbar = (props) => {
@@ -31,7 +32,7 @@ const Navbar = (props) => {
                 {/* This is the Logo */}
                 <NavLink to="/" >
                     {/* <img src={require('../../images/GutenMade-Logo-White.png')} alt="logo" /> */}
-                    {isOpen ? <Logo onClick={toggle}/> : <Logo /> }
+                    {isOpen ? <Logo src={gamelogo} onClick={toggle}/> : <Logo src={gamelogo}/> }
                 </NavLink>
 
                 {isOpen ? <Close onClick={toggle}/> : <Bars onClick={toggle}/>}

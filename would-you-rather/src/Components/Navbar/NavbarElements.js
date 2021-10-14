@@ -61,13 +61,24 @@ export const Close =styled(FaTimes)`
     }
 `
 
-export const Logo =styled(MdCompareArrows)`
+export const IconLogo =styled(MdCompareArrows)`
     display: block;
     color: #fff;
     font-size: 4rem;
     top: 0;
     right: 0;
     z-index: 1000;
+    cursor: pointer;
+`
+
+export const Logo =styled.img`
+    display: block;
+    color: #fff;
+    font-size: 4rem;
+    top: 0;
+    right: 0;
+    z-index: 1000;
+    width: 100px;
     cursor: pointer;
 `
 
