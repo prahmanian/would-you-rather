@@ -3,30 +3,15 @@ import styled from 'styled-components'
 import Select from 'react-select'
 import {users} from '../starter/_DATA'
 import UserImage from './UserImage'
-import { Label, BottomWrapperColumn } from './sharedElements'
-
+import { Label, BottomWrapperColumn, SolidButton as Button } from './sharedElements'
 import gamelogo from '../images/logo.png'
 
-
-const Button = styled.button`
-    height: 2rem;
-    border-radius: 5px;
-    margin: 10px;
-    
-    border: 2px solid lightgreen;
-    outline: none;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    text-decoration: none;
-    background: lightgreen;
-    color: #010606;
-
-    &:hover {
-        transition: all 0.2s ease-in-out;
-        background: transparent;
-        color: #010606;
-    }
-`
+// This Login Component is a lightweight interface for users to sign in to our application.
+// At this point, no user authentication is implemented.
+// This component needs access to the users portion of our store.
+// This component dispatches our sign in action to the store.
+// TODO: Add Redux Implementation for Sign In Action
+// TODO: Connect Component to Redux Store to get users data
 
 
 const LoginWrapper = styled.div`
@@ -84,7 +69,13 @@ class Login extends Component {
     }
 
     handleSubmit = (e) => {
-        alert('user: ' + this.state.selectedUser)
+        if(!this.state.selectedUser){alert('No user selected. Please select a user to sign in.')} 
+        else{
+            alert('user: ' + this.state.selectedUser)
+        }
+
+        // TODO: Add Redux Implementation for Sign In Action
+
         e.preventDefault()
     }
 
@@ -92,6 +83,7 @@ class Login extends Component {
 
         const options = []
 
+        // TODO: Connect Component to Redux Store to get users data
         for (const [user_id, user_obj] of Object.entries(users)) {
             // console.log("user", user_obj)
             options.push(
@@ -122,9 +114,6 @@ class Login extends Component {
             </LoginWrapper>
         )
     }
-
-
-
 
 }
 

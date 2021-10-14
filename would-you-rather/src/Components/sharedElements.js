@@ -79,6 +79,27 @@ export const BottomWrapperColumn = styled.div`
 `
 
 
+export const SolidButton = styled.button`
+    height: 2rem;
+    border-radius: 5px;
+    margin: 10px;
+    
+    border: 2px solid lightgreen;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    text-decoration: none;
+    background: lightgreen;
+    color: #010606;
+
+    &:hover {
+        transition: all 0.2s ease-in-out;
+        background: transparent;
+        color: #010606;
+    }
+`
+
+
 export class ResultsBar extends Component {
     render () {
         const { answered, total } = this.props
