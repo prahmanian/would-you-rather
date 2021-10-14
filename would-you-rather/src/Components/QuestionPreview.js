@@ -1,33 +1,17 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
 import { NavLink as Link } from 'react-router-dom'
-import { ImageWrapper,  DetailsWrapper, Label, BottomWrapper} from './sharedElements'
+import { ImageWrapper,  DetailsWrapper, Label, BottomWrapper, OutlineButton as Button} from './sharedElements'
 import UserImage from './UserImage'
 
 import {users} from '../starter/_DATA'
 import {questions} from '../starter/_DATA'
 
-
-const Button = styled.button`
-    width: 100%;
-    height: 2rem;
-    border-radius: 5px;
-    margin: 5px 0;
-    background: transparent;
-    color: #010606;
-    border: 2px solid lightgreen;
-    outline: none;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    text-decoration: none;
-
-    &:hover {
-        transition: all 0.2s ease-in-out;
-        background: lightgreen;
-        color: #010606
-    }
-`
+// This QuestionPreview Component renders a card style list element 
+// with a preview of a given question text and a link to open up the question.
+// This component needs to be passed a question id as props.
+// This component needs to read both the users and questions portions of our Redux store.
+// TODO connect to Redux store
 
 
 
@@ -38,7 +22,7 @@ class QuestionPreview extends Component {
     }
 
 
-
+// Example of a Question Entry
     // "8xf0y6ziyjabvozdd253nd": {
     //     id: '8xf0y6ziyjabvozdd253nd',
     //     author: 'sarahedo',
@@ -55,26 +39,22 @@ class QuestionPreview extends Component {
 
     render() {
 
-        
-        const question = questions[this.props.id]
-        const author = question.author
         const id = this.props.id
-        console.log('author', author)
-        const user = users[question.author]
+        const question = questions[id] //TODO Connect to Redux Store
+        const user_obj = users[question.author] //TODO connect to Redux Store
         const optionOneText = question.optionOne.text
         const optionTwoText = question.optionTwo.text
-
 
         return (
             <>
                 <Label>
-                    <h4 className="question">{user.name} asks:</h4>
+                    <h4 className="question">{user_obj.name} asks:</h4>
                 </Label>
 
                 <BottomWrapper>
 
                     <ImageWrapper>
-                        <UserImage user={user} size={"120px"}/>
+                        <UserImage user={user_obj} size={"120px"}/>
                     </ImageWrapper>
 
                     

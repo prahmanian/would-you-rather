@@ -6,8 +6,8 @@ import styled from 'styled-components'
 
 
 export const ImageWrapper = styled.div`
-    margin: auto;
-    padding: 0 10px;
+    margin: 10px auto;
+    /* padding: 0 10px; */
 `
 
 export const HR = styled.hr`
@@ -96,6 +96,26 @@ export const SolidButton = styled.button`
         transition: all 0.2s ease-in-out;
         background: transparent;
         color: #010606;
+    }
+`
+
+export const OutlineButton = styled.button`
+    width: 100%;
+    height: 2rem;
+    border-radius: 5px;
+    margin: 5px 0;
+    background: transparent;
+    color: #010606;
+    border: 2px solid lightgreen;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    text-decoration: none;
+
+    &:hover {
+        transition: all 0.2s ease-in-out;
+        background: lightgreen;
+        color: #010606
     }
 `
 

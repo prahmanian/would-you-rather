@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 import Avatar from 'react-avatar'
 
 
-// The Book component renders the UI to display each of our books.
+// The UserImage component is a custom implementation of the React Avatar component.
+// In this implementation, data is passed in as props.
 
 
 class UserImage extends Component {
