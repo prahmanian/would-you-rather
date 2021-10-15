@@ -10,6 +10,7 @@ import {questions} from '../starter/_DATA'
 // This QuestionPreview Component renders a card style list element 
 // with a preview of a given question text and a link to open up the question.
 // This component needs to be passed a question id as props.
+// Props: id (string) - the id of the question to preview
 // This component needs to read both the users and questions portions of our Redux store.
 // TODO connect to Redux store
 

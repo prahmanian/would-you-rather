@@ -118,7 +118,34 @@ export const OutlineButton = styled.button`
         color: #010606
     }
 `
+export const ToggleButton = styled.button`
+    width: 50%;
+    height: 2.5rem;
+    /* border-radius: 5px; */
+    /* margin: 5px 0; */
+    background: white;
+    color: lightgreen;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    text-decoration: none;
+    overflow: hidden;
+    font-weight: bolder;
 
+    &:hover {
+        transition: all 0.2s ease-in-out;
+        background: lightgreen;
+        color: #010606
+    
+    
+    }
+
+    &.selected {
+        background: lightgreen;
+        color: #010606;
+    }
+`
 
 export class ResultsBar extends Component {
     render () {

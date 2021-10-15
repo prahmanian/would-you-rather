@@ -1,10 +1,15 @@
 import React, { Component } from 'react'
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import {questions} from '../starter/_DATA'
+import {users, questions} from '../starter/_DATA'
 import QuestionPreview from './QuestionPreview'
+import {ToggleButton as Button} from './sharedElements'
 
-
+// The Dashboard Component serves as our root for a signed in user.
+// The dashboard displays two lists of question previews answered and unanswered by the current user.
+// There is also a toggle to switch between the answered /unanswered questions.
+// This component takes in the current signed in user's id as a prop.
+// Props: authUser (string) - the id of the current user.
 
 const StyledDashboard = styled.div`
     /* background: palegoldenrod; */
@@ -28,36 +33,6 @@ const StyledDashboard = styled.div`
     & ul {
         margin: 10px;
     }
-`
-
-const Button = styled.button`
-    width: 50%;
-    height: 2.5rem;
-    /* border-radius: 5px; */
-    /* margin: 5px 0; */
-    background: white;
-    color: lightgreen;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    text-decoration: none;
-    overflow: hidden;
-    font-weight: bolder;
-
-    &:hover {
-        transition: all 0.2s ease-in-out;
-        background: lightgreen;
-        color: #010606
-    
-    
-    }
-
-    &.selected {
-        background: lightgreen;
-        color: #010606;
-    }
-
 `
 
 // sarahedo: {
@@ -90,6 +65,10 @@ const Button = styled.button`
 //     },
 
 export default class Dashboard extends Component {
+
+    static propTypes = {
+        authUser: PropTypes.string.isRequired,
+    }
     
     state ={
         display: "unanswered"
@@ -104,29 +83,38 @@ export default class Dashboard extends Component {
     }
 
     render () {
-            const tempUser = this.props.authUser
-            console.log("user", tempUser)
+            // TODO users replace with Redux Store
+            const userId = this.props.authUser
+            const userObj = users[userId]
+            // console.log("authUser: ", userObj)
 
+            // TODO questions replace with Redux Store
             const filteredQuestions = this.state.display === 'unanswered'
-                ? Object.keys(questions).filter((id) => !Object.keys(tempUser.answers).includes(id))
-                : Object.keys(questions).filter((id) => Object.keys(tempUser.answers).includes(id))
+                ? Object.keys(questions).filter((id) => !Object.keys(userObj.answers).includes(id))
+                : Object.keys(questions).filter((id) => Object.keys(userObj.answers).includes(id))
+            // console.log('filteredquestions', filteredQuestions)
 
-            console.log('filteredquestions', filteredQuestions)
             return (
                 <StyledDashboard>
                     <div className="toggle">
-                        <Button className={this.state.display === 'unanswered' ? "selected" : "default" } onClick={this.toggleUnanswered}>Unanswered Questions</Button>
-                        <Button className={this.state.display === 'answered' ? "selected" : "default" } onClick={this.toggleAnswered}>Answered Questions</Button>
+                        <Button 
+                            className={this.state.display === 'unanswered' ? "selected" : "default" } 
+                            onClick={this.toggleUnanswered}
+                        >
+                            Unanswered Questions
+                        </Button>
+
+                        <Button 
+                            className={this.state.display === 'answered' ? "selected" : "default" } 
+                            onClick={this.toggleAnswered}
+                        >
+                            Answered Questions
+                        </Button>
                     </div>
-                    
+
                     <ul>
-                        {/* {Object.keys(questions).filter((id) => Object.keys(tempUser.answers).includes(id))} */}
-                        {filteredQuestions.map((id) => (<li key={id}><QuestionPreview id={id}></QuestionPreview></li>))}
-
+                        {filteredQuestions.map((id) => (<li key={id}><QuestionPreview id={id} /></li>))}
                     </ul>
-
-                    
-
 
                 </StyledDashboard>
             )

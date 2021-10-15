@@ -23,7 +23,7 @@ function App() {
 
       {/* <Leaderboard users={users} /> */}
       {/* <Question /> */}
-      <Dashboard authUser={users.sarahedo} />
+      <Dashboard authUser={users.sarahedo.id} />
     </div>
   );
 }
