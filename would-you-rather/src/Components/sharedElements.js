@@ -6,8 +6,8 @@ import styled from 'styled-components'
 
 
 export const ImageWrapper = styled.div`
-    margin: 10px auto;
-    /* padding: 0 10px; */
+    margin: auto;
+    align-content: center;
 `
 
 export const HR = styled.hr`

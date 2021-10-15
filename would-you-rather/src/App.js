@@ -1,30 +1,40 @@
 import './App.css';
-// import UserImage from './components/UserImage'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import {users} from './starter/_DATA'
 import Navbar from './components/Navbar';
-// import Login from './components/Login';
-// import Leaderboard from './components/Leaderboard'
+import Login from './components/Login';
+import Leaderboard from './components/Leaderboard'
 import AddQuestion from './components/AddQuestion'
-// import Question from './components/Question'
-// import Dashboard from './components/Dashboard'
+import Dashboard from './components/Dashboard'
+import Question from './components/Question';
 
 
 function App() {
+  const authUser = 'tylermcginnis'
   return (
     <div className="App">
-      <Navbar user={users.sarahedo}/>
+
+      <Navbar user={users[authUser]}/>
+
+      <Switch>
+
+        <Route exact path='/'><Redirect to='/home' /></Route>
+        <Route exact path='/home'>
+          {authUser ? <Redirect to='/dashboard' /> : <Redirect to='/login' />}
+        </Route>
+
+        <Route exact path='/login' component={Login} />
+        <Route exact path='/leaderboard'><Leaderboard users={users} /></Route>
+        <Route exact path='/add' component={AddQuestion} />
+        <Route exact path='/dashboard'><Dashboard authUser={authUser} /></Route>
+        <Route exact path='/questions/:id'><Question /></Route>
+
+      </Switch>
 
 
-      {/* <UserImage user={users.tylermcginnis} />
-      <UserImage user={users.sarahedo}/>
-      <UserImage user={users.johndoe} /> */}
-
-      {/* <Login /> */}
-
-      {/* <Leaderboard users={users} /> */}
+      {/*  */}
       {/* <Question /> */}
-      <AddQuestion />
-      {/* <Dashboard authUser={users.sarahedo.id} /> */}
+
     </div>
   );
 }

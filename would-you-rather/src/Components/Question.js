@@ -7,6 +7,7 @@ import {questions} from '../starter/_DATA'
 import { ImageWrapper, HR2 as HR, DetailsWrapper, Label , BottomWrapper} from './sharedElements'
 import UserImage from './UserImage'
 import {ResultsBar} from './sharedElements'
+import {withRouter} from 'react-router'
 
 
 
@@ -160,20 +161,23 @@ class Question extends Component {
     //   },
 
     state = {
-        answer: "optionOne"
+        answer: null
     }
+
+    
 
 
 
     render() {
 
         const tempUser = users.tylermcginnis
-        const tempQuestion = questions["8xf0y6ziyjabvozdd253nd"]
-        const id = tempQuestion.id
-        const optionOneText = tempQuestion.optionOne.text
-        const optionTwoText = tempQuestion.optionTwo.text
-        const optionOneVotes = tempQuestion.optionOne.votes.length
-        const optionTwoVotes = tempQuestion.optionTwo.votes.length
+        const id = this.props.match.params.id
+        const question = questions[id]
+        
+        const optionOneText = question.optionOne.text
+        const optionTwoText = question.optionTwo.text
+        const optionOneVotes = question.optionOne.votes.length
+        const optionTwoVotes = question.optionTwo.votes.length
 
         const classResultsOpt1 = this.state.answer === "optionOne" ? "selected" : "notselected"
         const classResultsOpt2 = this.state.answer === "optionTwo" ? "selected" : "notselected"
@@ -199,7 +203,7 @@ class Question extends Component {
 
                         ?
                             <DetailsWrapper>
-                                <p class="title">Results:</p>
+                                <p className="title">Results:</p>
                                 
                                 <p> Would you rather...</p>
 
@@ -221,11 +225,11 @@ class Question extends Component {
 
                         :
                             <DetailsWrapper>
-                                <p class="title">Would you rather . . .</p>
+                                <p className="title">Would you rather . . .</p>
                                 
                                 <Container>
-                                    <Select class="labl" for={id+"opt1"}>
-                                        <input type="radio" id={id+"opt1"} name={id} value="optionOne" class="inputtest" />
+                                    <Select className="labl" htmlFor={id+"opt1"}>
+                                        <input type="radio" id={id+"opt1"} name={id} value="optionOne" className="inputtest" />
                                         <div>{optionOneText}</div>
                                     </Select>
                                 </Container>
@@ -233,8 +237,8 @@ class Question extends Component {
                                 <Container><HR /><strong>OR</strong><HR /></Container>
 
                                 <Container>
-                                    <Select class="labl" for={id+"opt2"}>
-                                        <input type="radio" id={id+"opt2"} name={id} value="optionTwo" class="inputtest" />
+                                    <Select className="labl" htmlFor={id+"opt2"}>
+                                        <input type="radio" id={id+"opt2"} name={id} value="optionTwo" className="inputtest" />
                                         <div>{optionTwoText}</div>
                                     </Select>
                                 
@@ -255,7 +259,7 @@ class Question extends Component {
 }
 
 
-export default Question
+export default withRouter(Question)
 
 
 
