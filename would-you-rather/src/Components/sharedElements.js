@@ -70,7 +70,7 @@ export const BottomWrapperColumn = styled.div`
     width: 500px;
     border: 1px solid lightgrey;
     border-radius: 0 0 10px 10px;
-    /* padding: 10px; */
+    padding: 10px;
     margin: 0 auto;
     position: relative;
     border-top: 0px;
@@ -78,12 +78,30 @@ export const BottomWrapperColumn = styled.div`
 
 `
 
+export const Container = styled.div`
+    display: flex;
+    width: 480px;
+    align-content: center;
+    justify-content: space-between;
+    overflow: hidden;
+    /* margin: 10px 0; */
+    text-align: left;
+
+`
+
+export const Input = styled.input`
+    width: 100%;
+    height: 2rem;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+`
 
 export const SolidButton = styled.button`
     height: 2rem;
     border-radius: 5px;
     margin: 10px;
-    
     border: 2px solid lightgreen;
     outline: none;
     cursor: pointer;
@@ -96,6 +114,26 @@ export const SolidButton = styled.button`
         transition: all 0.2s ease-in-out;
         background: transparent;
         color: #010606;
+    }
+`
+
+export const LinkButton = styled.button`
+    width: 100%;
+    height: 2rem;
+    border-radius: 5px;
+    margin: 5px 0;
+    background: #256ce1;
+    color: #fff;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    text-decoration: none;
+
+    &:hover {
+        transition: all 0.2s ease-in-out;
+        background: lightgreen;
+        color: #010606
     }
 `
 

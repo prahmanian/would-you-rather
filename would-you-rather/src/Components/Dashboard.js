@@ -5,6 +5,9 @@ import {users, questions} from '../starter/_DATA'
 import QuestionPreview from './QuestionPreview'
 import {ToggleButton as Button} from './sharedElements'
 
+// TODO users replace with Redux Store
+// TODO questions replace with Redux Store
+
 // The Dashboard Component serves as our root for a signed in user.
 // The dashboard displays two lists of question previews answered and unanswered by the current user.
 // There is also a toggle to switch between the answered /unanswered questions.

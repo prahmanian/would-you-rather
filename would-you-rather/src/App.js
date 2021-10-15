@@ -4,9 +4,9 @@ import {users} from './starter/_DATA'
 import Navbar from './components/Navbar';
 // import Login from './components/Login';
 // import Leaderboard from './components/Leaderboard'
-// import AddQuestion from './components/AddQuestion'
+import AddQuestion from './components/AddQuestion'
 // import Question from './components/Question'
-import Dashboard from './components/Dashboard'
+// import Dashboard from './components/Dashboard'
 
 
 function App() {
@@ -23,7 +23,8 @@ function App() {
 
       {/* <Leaderboard users={users} /> */}
       {/* <Question /> */}
-      <Dashboard authUser={users.sarahedo.id} />
+      <AddQuestion />
+      {/* <Dashboard authUser={users.sarahedo.id} /> */}
     </div>
   );
 }
