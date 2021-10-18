@@ -1,25 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import LeaderbardUser from './LeaderboardUser'
-import styled from 'styled-components'
-
-const LeaderboardWrapper = styled.ul`
-    /* background: lightgreen; */
-    justify-content: center;
-    align-content: center;
-    display: block;
-    margin-top: 30px;
-`
-
-const LeaderboardLI = styled.li`
-    list-style: none;
-`
-
+import { ComponentWrapper, LI} from './sharedElements'
 
 class Leaderboard extends Component {
 
     static propTypes = {
-        users: PropTypes.object.isRequired,
+        store: PropTypes.object.isRequired,
     }
 
     state = {
@@ -27,8 +14,9 @@ class Leaderboard extends Component {
     }
 
     
+
     calculateScore = (userid) => {
-        const userobj = this.props.users[userid]
+        const userobj = this.props.store.users[userid]
         const score = Object.keys(userobj.answers).length + userobj.questions.length
         return score
     }
@@ -36,7 +24,7 @@ class Leaderboard extends Component {
     componentDidMount() {        
         let unsorted = []
 
-        for (const user in this.props.users) {
+        for (const user in this.props.store.users) {
             unsorted.push([user, this.calculateScore(user)])
         }
 
@@ -45,17 +33,18 @@ class Leaderboard extends Component {
     }
 
     render() {
-        const { users } = this.props
+        const { store } = this.props
+        const { users } = store
 
         return (
-            <LeaderboardWrapper>
+            <ComponentWrapper>
                 <h2>Current Leaders</h2>
                 {this.state.sorted.map((userkey, rank) => (
-                    <LeaderboardLI key={userkey[0]}>
+                    <LI key={userkey[0]}>
                         <LeaderbardUser user={users[userkey[0]]} rank={rank+1}/>
-                    </LeaderboardLI>
+                    </LI>
                 ))}
-            </LeaderboardWrapper>
+            </ComponentWrapper>
         )
     }   
 }

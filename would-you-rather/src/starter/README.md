@@ -31,8 +31,8 @@ Questions include:
 
 | Attribute | Type | Description |
 |-----------------|------------------|-------------------|
-| id                  | String | The question’s unique identifier |
-| author        | String | The author’s unique identifier |
+| id        | String | The question’s unique identifier |
+| author    | String | The author’s unique identifier |
 | timestamp | String | The time when the question was created|
 | optionOne | Object | The first voting option|
 | optionTwo | Object | The second voting option|

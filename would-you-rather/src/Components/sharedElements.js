@@ -24,6 +24,18 @@ export const HR2 = styled.hr`
     margin: auto;
 `
 
+export const LI = styled.li`
+    list-style: none;
+`
+
+export const ComponentWrapper = styled.ul`
+    /* background: lightgreen; */
+    justify-content: center;
+    align-content: center;
+    display: block;
+    margin-top: 30px;
+`
+
 export const DetailsWrapper = styled.div`
     display: flex;
     background: transparent;

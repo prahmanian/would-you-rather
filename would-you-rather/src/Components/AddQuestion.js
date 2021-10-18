@@ -20,7 +20,7 @@ class AddQuestion extends Component {
 
 
     render() {
-
+        console.log(this.props.store)
         return (
             <>
                 <Label><h2>Create a New Question</h2></Label>
