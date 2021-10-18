@@ -27,7 +27,8 @@ class App extends Component {
     return (
       <div className="App">
 
-        <Navbar user={users[store.authedUser]}/>
+        {/* <Navbar user={users[store.authedUser]}/> */}
+        <Navbar />
 
         <Switch>
 

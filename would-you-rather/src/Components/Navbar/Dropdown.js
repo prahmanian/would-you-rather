@@ -12,8 +12,9 @@ import {
     Welcome,
     Name,
 } from './DropdownElements'
+import {signOutUser} from '../../actions/authedUser'
 
-const Dropdown = ({isOpen, toggle, user}) => {
+const Dropdown = ({isOpen, toggle, user, dispatch}) => {
 
     return (
         <DropdownContainer isOpen={isOpen} onClick={toggle}>
@@ -42,7 +43,7 @@ const Dropdown = ({isOpen, toggle, user}) => {
 
                 <DropdownBtnWrapper>
                     {user 
-                    ?   <DropdownRoute to='/login'>Log Out</DropdownRoute>
+                    ?   <DropdownRoute to='/login' onClick={() => {dispatch(signOutUser())}}>Log Out</DropdownRoute>
                     :   <DropdownRoute to='/login'>Login</DropdownRoute>
                     }
                     

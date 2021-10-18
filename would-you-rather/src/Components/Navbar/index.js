@@ -12,9 +12,11 @@ import {
     // LogoutBtn
 } from './NavbarElements';
 import UserImage from '../UserImage'
-// import {MdCompareArrows} from 'react-icons/md'
+
 import Dropdown from './Dropdown';
 import gamelogo from '../../images/logo.png'
+import { connect } from 'react-redux'
+import {signOutUser} from '../../actions/authedUser'
 
 
 const Navbar = (props) => {
@@ -24,20 +26,18 @@ const Navbar = (props) => {
     }
 
     const user = props.user
-    // console.log("user obj:", user)
 
     return (
         <>
             <Nav>
                 {/* This is the Logo */}
                 <NavLink to="/" >
-                    {/* <img src={require('../../images/GutenMade-Logo-White.png')} alt="logo" /> */}
                     {isOpen ? <Logo src={gamelogo} onClick={toggle}/> : <Logo src={gamelogo}/> }
                 </NavLink>
 
                 {isOpen ? <Close onClick={toggle}/> : <Bars onClick={toggle}/>}
 
-                <Dropdown isOpen={isOpen} toggle={toggle} user={user}/>
+                <Dropdown isOpen={isOpen} toggle={toggle} user={user} dispatch={props.dispatch}/>
 
                 <NavMenu>
                     {/* <NavLink to="/home" activeStyle> Home </NavLink>
@@ -55,14 +55,14 @@ const Navbar = (props) => {
                         ?   <Welcome>
                                 <p>Hello, {user.name}!</p>
                                 <UserImage user={user} size={"34px"} />
-
-                                <NavBtnLink to="/login">Log Out</NavBtnLink>
-
+                                <NavBtnLink to="/login" onClick={() => {props.dispatch(signOutUser())}}>Log Out</NavBtnLink>
                             </Welcome>
 
-                        :   <NavBtn>
-                                <NavBtnLink to="/login">Login</NavBtnLink>
-                            </NavBtn>
+                        :   <Welcome>
+                                <NavBtn>
+                                    <NavBtnLink to="/login">Login</NavBtnLink>
+                                </NavBtn>
+                            </Welcome>
                         
                     }
                 </div>
@@ -74,4 +74,8 @@ const Navbar = (props) => {
     )
 }
 
-export default Navbar
+function mapStateToProps( {users, authedUser}) {
+    return {user: users[authedUser]}
+}
+
+export default connect(mapStateToProps)(Navbar)

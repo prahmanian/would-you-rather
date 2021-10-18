@@ -8,14 +8,14 @@ export const DropdownContainer = styled.aside`
     position: fixed;
     z-index: 9;
     width: 100%;
-    height: 60%;
+    height: 100%;
     background: #0d0d0d;
     display: grid;
     align-items: center;
     justify-content: center;
     top: 0;
     left: 0;
-    transition: 0.2s ease-in-out;
+    transition: 0.1s ease-in-out;
     opacity: ${({isOpen}) => (isOpen ? '100%' : '0')};
     top: ${({isOpen}) => (isOpen ? '0px' : '-100%')};
 
@@ -43,13 +43,13 @@ export const DropdownWrapper = styled.div`
 export const DropdownMenu = styled.ul`
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(4, 80px);
+    grid-template-rows: repeat(3, 70px);
     text-align: center;
     justify-items: center;
-    padding-top: 20px;
+    padding-bottom: 20px;
 
     @media screen and (max-width: 480px) {
-        grid-template-rows: repeat(4, 60px);
+        grid-template-rows: repeat(3, 60px);
     }
 
 `
