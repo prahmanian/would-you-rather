@@ -1,6 +1,7 @@
 import { getInitialData } from '../utils/api'
 import { receiveUsers } from './users'
-import { receiveQuestions } from './questiosn'
+import { receiveQuestions } from './questions'
+import { signInUser } from './authedUser'
 
 
 export function handleInitialData () {
@@ -9,6 +10,7 @@ export function handleInitialData () {
             .then(({users, questions}) => {
                 dispatch(receiveUsers(users))
                 dispatch(receiveQuestions(questions))
+                dispatch(signInUser(null))
             })
     }
 }
