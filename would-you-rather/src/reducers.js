@@ -1,19 +1,5 @@
 //auth reducer
-import {SIGN_IN, SIGN_OUT, CREATE_QUESTION, ANSWER_QUESTION } from './actions'
-import Redux from  'react-redux'
-
-
-
-export function authUser (state = null, action) {
-    switch(action.type) {
-        case SIGN_IN:
-            return action.userId
-        case SIGN_OUT:
-            return null
-        default:
-            return state
-    }
-}
+import { CREATE_QUESTION, ANSWER_QUESTION } from './actions'
 
     // users = {
     //     sarahedo: {
@@ -28,7 +14,7 @@ export function authUser (state = null, action) {
     //       },
     //       questions: ['8xf0y6ziyjabvozdd253nd', 'am8ehyc8byjqgar0jgpub9']
     //     },
-    
+
 export function users (state = {}, action) {
     switch(action.type) {
         case CREATE_QUESTION:
@@ -52,8 +38,3 @@ export function questions (state = {}, action) {
 }
 
 
-const store = Redux.createStore(Redux.combineReducers({
-    authUser,
-    users,
-    questions
-}))
