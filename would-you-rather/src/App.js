@@ -19,11 +19,11 @@ class App extends Component {
   }
 
   render() {
-    const store = {
-      authedUser: 'tylermcginnis',
-      users,
-      questions
-    }
+    // const store = {
+    //   authedUser: 'tylermcginnis',
+    //   users,
+    //   questions
+    // }
 
     console.log(this.props)
     return (
@@ -42,12 +42,10 @@ class App extends Component {
           <Route exact path='/leaderboard'><Leaderboard /></Route>
           {/* <Route exact path='/add'><AddQuestion store={store}/></Route> */}
           <Route exact path='/dashboard'><Dashboard /></Route>
-          {/* <Route exact path='/questions/:id'><Question store={store}/></Route> */}
+          {/* <Route exact path='/questions/:id'><Question /></Route> */}
 
         </Switch>
 
-
-        {/*  */}
         {/* <Question /> */}
 
       </div>

@@ -3,9 +3,10 @@ import PropTypes from 'prop-types'
 import { NavLink as Link } from 'react-router-dom'
 import { ImageWrapper,  DetailsWrapper, Label, BottomWrapper, OutlineButton as Button} from './sharedElements'
 import UserImage from './UserImage'
+import { connect } from 'react-redux'
 
-import {users} from '../starter/_DATA'
-import {questions} from '../starter/_DATA'
+// import {users} from '../starter/_DATA'
+// import {questions} from '../starter/_DATA'
 
 // This QuestionPreview Component renders a card style list element 
 // with a preview of a given question text and a link to open up the question.
@@ -41,8 +42,8 @@ class QuestionPreview extends Component {
     render() {
 
         const id = this.props.id
-        const question = questions[id] //TODO Connect to Redux Store
-        const user_obj = users[question.author] //TODO connect to Redux Store
+        const question = this.props.questions[id] //TODO Connect to Redux Store
+        const user_obj = this.props.users[question.author] //TODO connect to Redux Store
         const optionOneText = question.optionOne.text
         const optionTwoText = question.optionTwo.text
 
@@ -75,5 +76,11 @@ class QuestionPreview extends Component {
     }
 }
 
+function mapStateToProps({users, questions}, {id}) {
+    return {
+        users,
+        questions,
+        id
+    }}
 
-export default QuestionPreview
+export default connect(mapStateToProps)(QuestionPreview)

@@ -50,12 +50,11 @@ class Dashboard extends Component {
     }
 
     render () {
-        const { authedUser, users, questions } = this.props
-        const userObj = users[authedUser]
-
+        const { questionIds, userAnswers } = this.props
+        console.log('userAnswers ', userAnswers)
         const filteredQuestions = this.state.display === 'unanswered'
-            ? Object.keys(questions).filter((id) => !Object.keys(userObj.answers).includes(id))
-            : Object.keys(questions).filter((id) => Object.keys(userObj.answers).includes(id))
+            ? questionIds.filter((id) => !userAnswers.includes(id))
+            : questionIds.filter((id) => userAnswers.includes(id))
 
         return (
             <StyledDashboard>
@@ -84,7 +83,11 @@ class Dashboard extends Component {
         }
 }
 function mapStateToProps({authedUser, users, questions}){
-    return {authedUser, users, questions}
+
+    return {
+        userAnswers: Object.keys(users[authedUser].answers),
+        questionIds: Object.keys(questions),
+    }
 }
 
 export default connect(mapStateToProps)(Dashboard)

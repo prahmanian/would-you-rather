@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
-// import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { NavLink as Link } from 'react-router-dom'
-import {users} from '../starter/_DATA'
-import {questions} from '../starter/_DATA'
+// import { NavLink as Link } from 'react-router-dom'
 import { ImageWrapper, HR2 as HR, DetailsWrapper, Label , BottomWrapper} from './sharedElements'
 import UserImage from './UserImage'
 import {ResultsBar} from './sharedElements'
 import {withRouter} from 'react-router'
+import { connect } from 'react-redux'
 
 
 
@@ -138,14 +136,6 @@ const Select = styled.label`
 
 class Question extends Component {
 
-    // static propTypes = {
-    //     user: PropTypes.object.isRequired,
-    //     size: PropTypes.string,
-    //     round: PropTypes.bool,
-    // }
-
-
-
     // "8xf0y6ziyjabvozdd253nd": {
     //     id: '8xf0y6ziyjabvozdd253nd',
     //     author: 'sarahedo',
@@ -164,18 +154,37 @@ class Question extends Component {
         answer: null
     }
 
-    
+    componentDidMount() {
+        const { authedUser, users } = this.props
 
+        const userObj = users[authedUser]
+        const id = this.props.match.params.id
+        //If user has answered the question, we updated the state to reflect their response
+        Object.keys(userObj.answers).includes(id) && this.setState({answer: userObj.answers[id]})
+    }
 
+    handleSubmit(e) {
+        e.preventDefault()
+        let data = new FormData(document.querySelector("form"))
+        let answer = "";
+        for (const entry of data) {
+            answer = entry[1];
+        };
+        console.log('answer: ', answer)
+        this.setState({answer})
+    }
 
     render() {
-
-        const tempUser = users.tylermcginnis
+        const { authedUser, users, questions } = this.props
+        const userObj = users[authedUser]
         const id = this.props.match.params.id
+        // const id = "test"
         const question = questions[id]
-        
-        const optionOneText = question.optionOne.text
-        const optionTwoText = question.optionTwo.text
+        console.log('question ', question)
+        console.log('props ', this.props)
+
+        const optionOneText = question ? question.optionOne.text : 'error'
+        const optionTwoText = question ? question.optionTwo.text : 'error'
         const optionOneVotes = question.optionOne.votes.length
         const optionTwoVotes = question.optionTwo.votes.length
 
@@ -187,15 +196,15 @@ class Question extends Component {
                 <Label>
                     {
                         this.state.answer
-                        ? <h4 className="question">Asked by {tempUser.name}</h4>
-                        : <h4 className="question">{tempUser.name} asks:</h4>
+                        ? <h4 className="question">Asked by {userObj.name}</h4>
+                        : <h4 className="question">{userObj.name} asks:</h4>
                     }
                 </Label>
 
                 <BottomWrapper>
 
                     <ImageWrapper>
-                        <UserImage user={tempUser} size={"120px"}/>
+                        <UserImage user={userObj} size={"120px"}/>
                     </ImageWrapper>
 
                     {
@@ -226,25 +235,31 @@ class Question extends Component {
                         :
                             <DetailsWrapper>
                                 <p className="title">Would you rather . . .</p>
+                                <form id={`selector`}>
+                                    <Container>
+                                        <Select className="labl" htmlFor={id+"opt1"}>
+                                            <input type="radio" id={id+"opt1"} name={id} value="optionOne" className="inputtest" />
+                                            <div>{optionOneText}</div>
+                                        </Select>
+                                    </Container>
+
+                                    <Container><HR /><strong>OR</strong><HR /></Container>
+
+                                    <Container>
+                                        <Select className="labl" htmlFor={id+"opt2"}>
+                                            <input type="radio" id={id+"opt2"} name={id} value="optionTwo" className="inputtest" />
+                                            <div>{optionTwoText}</div>
+                                        </Select>
+                                    
+                                    </Container>
+
+                                    <Button
+                                        onClick={this.handleSubmit}
+                                    >Submit</Button>
+                                </form>
                                 
-                                <Container>
-                                    <Select className="labl" htmlFor={id+"opt1"}>
-                                        <input type="radio" id={id+"opt1"} name={id} value="optionOne" className="inputtest" />
-                                        <div>{optionOneText}</div>
-                                    </Select>
-                                </Container>
 
-                                <Container><HR /><strong>OR</strong><HR /></Container>
-
-                                <Container>
-                                    <Select className="labl" htmlFor={id+"opt2"}>
-                                        <input type="radio" id={id+"opt2"} name={id} value="optionTwo" className="inputtest" />
-                                        <div>{optionTwoText}</div>
-                                    </Select>
-                                
-                                </Container>
-
-                                <Link to="/"><Button>Submit</Button></Link>
+                                {/* <Link to="/"><Button>Submit</Button></Link> */}
 
                             </DetailsWrapper>
                     }
@@ -258,9 +273,13 @@ class Question extends Component {
     }
 }
 
+function mapStateToProps( {authedUser, users, questions}) {
+    return {authedUser, users, questions}
+}
 
-export default withRouter(Question)
+export default withRouter(connect(mapStateToProps)(Question))
 
+// export default connect(mapStateToProps)(Question)
 
 
 // function addTodo () {
