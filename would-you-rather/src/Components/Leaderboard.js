@@ -1,22 +1,16 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import LeaderbardUser from './LeaderboardUser'
 import { ComponentWrapper, LI} from './sharedElements'
+import { connect } from 'react-redux'
 
 class Leaderboard extends Component {
-
-    static propTypes = {
-        store: PropTypes.object.isRequired,
-    }
 
     state = {
         sorted: []
     }
 
-    
-
     calculateScore = (userid) => {
-        const userobj = this.props.store.users[userid]
+        const userobj = this.props.users[userid]
         const score = Object.keys(userobj.answers).length + userobj.questions.length
         return score
     }
@@ -24,17 +18,17 @@ class Leaderboard extends Component {
     componentDidMount() {        
         let unsorted = []
 
-        for (const user in this.props.store.users) {
+        for (const user in this.props.users) {
             unsorted.push([user, this.calculateScore(user)])
         }
 
         const sorted = unsorted.sort((a,b) => (a[1] > b[1]) ? -1 : 1)
+        // console.log('sorted: ', sorted)
         this.setState({sorted})
     }
 
     render() {
-        const { store } = this.props
-        const { users } = store
+        const { users } = this.props
 
         return (
             <ComponentWrapper>
@@ -49,5 +43,7 @@ class Leaderboard extends Component {
     }   
 }
 
-
-export default Leaderboard
+function mapStatetoProps({users}){
+    return {users}
+}
+export default connect(mapStatetoProps)(Leaderboard)

@@ -4,7 +4,7 @@ import { Route, Switch, Redirect } from 'react-router-dom'
 import {users, questions} from './starter/_DATA'
 import Navbar from './components/Navbar';
 import Login from './components/Login';
-// import Leaderboard from './components/Leaderboard'
+import Leaderboard from './components/Leaderboard'
 // import AddQuestion from './components/AddQuestion'
 // import Dashboard from './components/Dashboard'
 // import Question from './components/Question';
@@ -39,7 +39,7 @@ class App extends Component {
           </Route>
 
           <Route exact path='/login'><Login /></Route>
-          {/* <Route exact path='/leaderboard'><Leaderboard store={store}/></Route> */}
+          <Route exact path='/leaderboard'><Leaderboard /></Route>
           {/* <Route exact path='/add'><AddQuestion store={store}/></Route> */}
           {/* <Route exact path='/dashboard'><Dashboard authUser={store.authUser} store={store}/></Route> */}
           {/* <Route exact path='/questions/:id'><Question store={store}/></Route> */}
