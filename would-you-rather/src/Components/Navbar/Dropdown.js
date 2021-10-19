@@ -27,7 +27,7 @@ const Dropdown = ({isOpen, toggle, user, dispatch}) => {
                 {user
                     &&   <Welcome>
                             
-                            <UserImage user={user} size={"54px"} />
+                            <UserImage userId={user.id} size={"54px"} />
                             <Name>Hello, {user.name}!</Name>
                         </Welcome>
                         

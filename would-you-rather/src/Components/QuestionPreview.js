@@ -5,16 +5,11 @@ import { ImageWrapper,  DetailsWrapper, Label, BottomWrapper, OutlineButton as B
 import UserImage from './UserImage'
 import { connect } from 'react-redux'
 
-// import {users} from '../starter/_DATA'
-// import {questions} from '../starter/_DATA'
-
 // This QuestionPreview Component renders a card style list element 
 // with a preview of a given question text and a link to open up the question.
 // This component needs to be passed a question id as props.
 // Props: id (string) - the id of the question to preview
 // This component needs to read both the users and questions portions of our Redux store.
-// TODO connect to Redux store
-
 
 
 class QuestionPreview extends Component {
@@ -23,47 +18,26 @@ class QuestionPreview extends Component {
         id: PropTypes.string.isRequired,
     }
 
-
-// Example of a Question Entry
-    // "8xf0y6ziyjabvozdd253nd": {
-    //     id: '8xf0y6ziyjabvozdd253nd',
-    //     author: 'sarahedo',
-    //     timestamp: 1467166872634,
-    //     optionOne: {
-    //       votes: ['sarahedo'],
-    //       text: 'have horrible short term memory',
-    //     },
-    //     optionTwo: {
-    //       votes: [],
-    //       text: 'have horrible long term memory'
-    //     }
-    //   },
-
     render() {
-
-        const id = this.props.id
-        const question = this.props.questions[id] //TODO Connect to Redux Store
-        const user_obj = this.props.users[question.author] //TODO connect to Redux Store
-        const optionOneText = question.optionOne.text
-        const optionTwoText = question.optionTwo.text
+        const { id, authorId, authorName, optionOneText, optionTwoText } = this.props
 
         return (
             <>
                 <Label>
-                    <h4 className="question">{user_obj.name} asks:</h4>
+                    <h4 className="question">{authorName} asks:</h4>
                 </Label>
 
                 <BottomWrapper>
 
                     <ImageWrapper>
-                        <UserImage user={user_obj} size={"120px"}/>
+                        <UserImage userId={authorId} size={"120px"}/>
                     </ImageWrapper>
 
                     
                     <DetailsWrapper>
                         <p className="title">Would you rather . . .</p>
 
-                        <p>{optionOneText} ~ or ~  {optionTwoText}</p>
+                        <p><span style={{color: "#009DE4"}}>{optionOneText}</span> /or/ <span style={{color: "#F23B3C"}}>{optionTwoText}</span></p>
 
                         <Link to={`/questions/${id}`}><Button>View Question</Button></Link>
 
@@ -77,10 +51,14 @@ class QuestionPreview extends Component {
 }
 
 function mapStateToProps({users, questions}, {id}) {
+    const question = questions[id]
+    const authorId = question.author
     return {
-        users,
-        questions,
-        id
+        id,
+        authorId,
+        authorName: users[authorId].name,
+        optionOneText: question.optionOne.text,
+        optionTwoText: question.optionTwo.text,
     }}
 
 export default connect(mapStateToProps)(QuestionPreview)
