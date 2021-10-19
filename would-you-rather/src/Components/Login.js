@@ -1,18 +1,17 @@
-import React, { Component } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import Select from 'react-select'
-import {users} from '../starter/_DATA'
 import UserImage from './UserImage'
 import { Label, BottomWrapperColumn, SolidButton as Button } from './sharedElements'
 import gamelogo from '../images/logo.png'
+import { connect } from 'react-redux'
+import { signInUser } from '../actions/authedUser'
+import { useHistory } from 'react-router-dom' 
 
 // This Login Component is a lightweight interface for users to sign in to our application.
 // At this point, no user authentication is implemented.
-// This component needs access to the users portion of our store.
-// This component dispatches our sign in action to the store.
-// TODO: Add Redux Implementation for Sign In Action
-// TODO: Connect Component to Redux Store to get users data
-
+// This component needs access to the authedUser and users portions of our store.
+// This component dispatches our sign in action to the store and redirects to the dashboard.
 
 const LoginWrapper = styled.div`
 
@@ -60,61 +59,68 @@ const StyledSelect = styled(Select)`
 `
 
 
-class Login extends Component {
-    state = { selectedUser: null }
+function Login (props) {
+    const history = useHistory()
+    //check if authedUser exists and redirect to dahsboard if so
+    if (props.authedUser) { history.push('/dashboard')}
+
+    let newSelectedUser = null
     
-    handleChange = (selectedUser) => {
-        this.setState({selectedUser: selectedUser.value});
-        console.log('new selected user: ', selectedUser.value)
+    const handleChange = (selectedUser) => {
+        newSelectedUser = selectedUser.value
+        console.log('new selected user: ', newSelectedUser)
+        
     }
 
-    handleSubmit = (e) => {
-        if(!this.state.selectedUser){alert('No user selected. Please select a user to sign in.')} 
+    
+
+    const handleSubmit = (e) => {
+        if(!newSelectedUser){alert('No user selected. Please select a user to sign in.')} 
         else{
-            alert('user: ' + this.state.selectedUser)
+            props.dispatch(signInUser(newSelectedUser))
+            history.push('/dashboard');
         }
-
-        // TODO: Add Redux Implementation for Sign In Action
-
         e.preventDefault()
     }
 
-    render () {
-
-        const options = []
-
-        // TODO: Connect Component to Redux Store to get users data
-        for (const [user_id, user_obj] of Object.entries(users)) {
-            // console.log("user", user_obj)
-            options.push(
-                {
-                    value: user_id, 
-                    label: <><UserImage user={user_obj} size="35px"/><span className="user_name">{user_obj.name}</span></>
-                }
-            )
-        }
-
-        return (
-            <LoginWrapper>
-                <Label>
-                    <h1>Welcome to the game!</h1>
-                </Label>
-
-                <BottomWrapperColumn>
-                    <img id="gamelogo" src={gamelogo} alt="LOGO" />
-
-                    <strong>Please sign in to play the game.</strong>
-
-
-                    <StyledSelect  onChange={this.handleChange} id="login" options={options} className="react-select-container" classNamePrefix='react-select' />
-
-                    <Button onClick={this.handleSubmit} >Sign In</Button>
-
-                </BottomWrapperColumn>            
-            </LoginWrapper>
+    const options = []
+    for (const [user_id, user_obj] of Object.entries(props.users)) {
+        options.push(
+            {
+                value: user_id, 
+                label: <><UserImage user={user_obj} size="35px"/><span className="user_name">{user_obj.name}</span></>
+            }
         )
     }
 
+    return (
+        <LoginWrapper>
+            <Label>
+                <h1>Welcome to the game!</h1>
+            </Label>
+
+            <BottomWrapperColumn>
+                <img id="gamelogo" src={gamelogo} alt="LOGO" />
+
+                <strong>Please sign in to play the game.</strong>
+
+
+                <StyledSelect onChange={handleChange} id="login" options={options} className="react-select-container" classNamePrefix='react-select' />
+
+                <Button onClick={handleSubmit} >Sign In</Button>
+
+            </BottomWrapperColumn>            
+        </LoginWrapper>
+    )
 }
 
-export default Login
+
+
+
+
+
+function mapStateToProps( {authedUser, users}) {
+    return {authedUser, users}
+}
+
+export default connect(mapStateToProps)(Login)
