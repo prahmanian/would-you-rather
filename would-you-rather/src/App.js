@@ -6,7 +6,7 @@ import Navbar from './components/Navbar';
 import Login from './components/Login';
 import Leaderboard from './components/Leaderboard'
 // import AddQuestion from './components/AddQuestion'
-// import Dashboard from './components/Dashboard'
+import Dashboard from './components/Dashboard'
 // import Question from './components/Question';
 
 import { connect } from 'react-redux'
@@ -41,7 +41,7 @@ class App extends Component {
           <Route exact path='/login'><Login /></Route>
           <Route exact path='/leaderboard'><Leaderboard /></Route>
           {/* <Route exact path='/add'><AddQuestion store={store}/></Route> */}
-          {/* <Route exact path='/dashboard'><Dashboard authUser={store.authUser} store={store}/></Route> */}
+          <Route exact path='/dashboard'><Dashboard /></Route>
           {/* <Route exact path='/questions/:id'><Question store={store}/></Route> */}
 
         </Switch>

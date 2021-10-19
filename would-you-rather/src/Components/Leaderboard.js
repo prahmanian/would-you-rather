@@ -43,7 +43,7 @@ class Leaderboard extends Component {
     }   
 }
 
-function mapStatetoProps({users}){
+function mapStateToProps({users}){
     return {users}
 }
-export default connect(mapStatetoProps)(Leaderboard)
+export default connect(mapStateToProps)(Leaderboard)
