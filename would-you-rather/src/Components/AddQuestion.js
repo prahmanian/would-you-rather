@@ -9,6 +9,7 @@ import {
     Input
 } from './sharedElements'
 import { connect } from 'react-redux'
+import { handleAddQuestion } from '../actions/questions'
 
 class AddQuestion extends Component {
 
@@ -34,9 +35,13 @@ class AddQuestion extends Component {
     handleSubmit = (e) => {
         e.preventDefault()
         const {optionOneText, optionTwoText} = this.state
+        const { dispatch } = this.props
         //TODO Add Question to Store
+
         console.log('Opt1: ', optionOneText)
         console.log('Opt2: ', optionTwoText)
+
+        dispatch(handleAddQuestion(optionOneText, optionTwoText))
     }
 
     render() {
@@ -54,7 +59,8 @@ class AddQuestion extends Component {
                         <Container><Input id='optionOne' type='text' placeholder='Enter Option One Text Here' value={optionOneText} onChange={this.handleChangeOptionOne}/></Container>
                         <Container><HR /><strong>OR</strong><HR /></Container>
                         <Container><Input id='optionTwo' type='text' placeholder='Enter Option Two Text Here' value={optionTwoText} onChange={this.handleChangeOptionTwo}/></Container>
-                        <Link to="/"><Button type='submit' disabled={optionOneText === '' || optionTwoText === ''}>Submit</Button></Link>
+                        {/* <Link to="/"><Button type='submit' disabled={optionOneText === '' || optionTwoText === ''}>Submit</Button></Link> */}
+                        <Button type='submit' disabled={optionOneText === '' || optionTwoText === ''}>Submit</Button>
                     </form>
 
                 </BottomWrapperColumn>

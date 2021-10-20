@@ -13,7 +13,7 @@ import { connect } from 'react-redux'
 const StyledDashboard = styled.div`
     /* background: palegoldenrod; */
     width: 550px;
-    max-height: 1000px;
+    /* max-height: 1000px; */
     overflow: scroll;
     /* color: blue; */
     margin: 10px auto;
@@ -27,10 +27,16 @@ const StyledDashboard = styled.div`
     & .toggle {
         border-bottom: 2px solid lightgrey;
         margin-bottom: 10px;
+        position: relative;
     }
 
     & ul {
         margin: 10px;
+    }
+
+    & .ul {
+        overflow: scroll;
+        max-height: 950px;
     }
 `
 
@@ -74,9 +80,12 @@ class Dashboard extends Component {
                     </Button>
                 </div>
 
-                <ul>
-                    {filteredQuestions.map((id) => (<li key={id}><QuestionPreview id={id} /></li>))}
-                </ul>
+                <div className="ul">
+                    <ul>
+                        {filteredQuestions.map((id) => (<li key={id}><QuestionPreview id={id} /></li>))}
+                    </ul>
+                </div>
+                
 
             </StyledDashboard>
         )

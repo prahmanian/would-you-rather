@@ -1,9 +1,22 @@
-import { getInitialData } from '../utils/api'
+import {
+    _getUsers,
+    _getQuestions,
+} from '../starter/_DATA'
 import { receiveUsers } from './users'
 import { receiveQuestions } from './questions'
 import { signInUser } from './authedUser'
 import { showLoading, hideLoading } from 'react-redux-loading'
 
+
+function getInitialData () {
+    return Promise.all([
+        _getUsers(),
+        _getQuestions(),
+    ]).then(([users, questions]) => ({
+        users,
+        questions,
+    }))
+}
 
 export function handleInitialData () {
     return (dispatch) => {
@@ -22,18 +35,7 @@ export function handleInitialData () {
 
 
 
-// //Questions Actions
-//     //Create New Question
-//     export const CREATE_QUESTION = "CREATE_QUESTION"
 
-//     export function createQuestionAction (question) {
-//         return {
-//             type: CREATE_QUESTION,
-//             question
-//         }
-//     }
-
-//     //Add a New Answer
 //     export const ANSWER_QUESTION = "ANSWER_QUESTION"
 
 //     export function answerQuestionAction (question) {
