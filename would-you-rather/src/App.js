@@ -4,7 +4,7 @@ import { Route, Switch, Redirect } from 'react-router-dom'
 import Navbar from './components/Navbar';
 import Login from './components/Login';
 import Leaderboard from './components/Leaderboard'
-// import AddQuestion from './components/AddQuestion'
+import AddQuestion from './components/AddQuestion'
 import Dashboard from './components/Dashboard'
 // import Question from './components/Question';
 
@@ -36,7 +36,7 @@ class App extends Component {
 
           <Route exact path='/login'><Login /></Route>
           <Route exact path='/leaderboard'><Leaderboard /></Route>
-          {/* <Route exact path='/add'><AddQuestion store={store}/></Route> */}
+          <Route exact path='/add'><AddQuestion /></Route>
           <Route exact path='/dashboard'><Dashboard /></Route>
           {/* <Route exact path='/questions/:id'><Question /></Route> */}
 

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-// import PropTypes from 'prop-types'
 import { NavLink as Link } from 'react-router-dom'
 import {
     HR2 as HR,
@@ -9,18 +8,40 @@ import {
     Container,
     Input
 } from './sharedElements'
-
+import { connect } from 'react-redux'
 
 class AddQuestion extends Component {
 
-    // static propTypes = {
-    //     user: PropTypes.object.isRequired,
-    // }
+    state = {
+        optionOneText: '',
+        optionTwoText: '',
+    }
 
+    handleChangeOptionOne = (e) => {
+        const text = e.target.value
+        this.setState(() => ({
+            optionOneText: text, 
+        }))
+    }
 
+    handleChangeOptionTwo = (e) => {
+        const text = e.target.value
+        this.setState(() => ({
+            optionTwoText: text, 
+        }))
+    }
+
+    handleSubmit = (e) => {
+        e.preventDefault()
+        const {optionOneText, optionTwoText} = this.state
+        //TODO Add Question to Store
+        console.log('Opt1: ', optionOneText)
+        console.log('Opt2: ', optionTwoText)
+    }
 
     render() {
-        console.log(this.props.store)
+        // console.log(this.state)
+        const { optionOneText, optionTwoText } = this.state 
         return (
             <>
                 <Label><h2>Create a New Question</h2></Label>
@@ -29,12 +50,12 @@ class AddQuestion extends Component {
                     <p>Complete the question:</p>
                     <br/>
                     <strong>Would you rather . . .</strong>
-                    <Container><Input id='optionOne' type='text' placeholder='Enter Option One Text Here' /></Container>
-                    <Container><HR /><strong>OR</strong><HR /></Container>
-                    <Container><Input id='optionTwo' type='text' placeholder='Enter Option Two Text Here' /></Container>
-                    <Link to="/"><Button>Submit</Button></Link>
-
-
+                    <form onSubmit={this.handleSubmit}>
+                        <Container><Input id='optionOne' type='text' placeholder='Enter Option One Text Here' value={optionOneText} onChange={this.handleChangeOptionOne}/></Container>
+                        <Container><HR /><strong>OR</strong><HR /></Container>
+                        <Container><Input id='optionTwo' type='text' placeholder='Enter Option Two Text Here' value={optionTwoText} onChange={this.handleChangeOptionTwo}/></Container>
+                        <Link to="/"><Button type='submit' disabled={optionOneText === '' || optionTwoText === ''}>Submit</Button></Link>
+                    </form>
 
                 </BottomWrapperColumn>
             </>
@@ -42,8 +63,11 @@ class AddQuestion extends Component {
     }
 }
 
+function mapStateToProps( {authedUser}) {
+    return {authedUser}
+}
 
-export default AddQuestion
+export default connect(mapStateToProps)(AddQuestion)
 
 
 

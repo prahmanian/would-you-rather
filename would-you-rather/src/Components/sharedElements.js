@@ -217,6 +217,11 @@ export const LinkButton = styled.button`
         background: lightgreen;
         color: #010606
     }
+
+    :disabled {
+        background: lightgray;
+        color: white;
+    }
 `
 
 export const OutlineButton = styled.button`
