@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import UserImage from './UserImage'
 import styled from 'styled-components'
 import { ImageWrapper, HR } from './sharedElements'
+import { connect } from 'react-redux'
 
 
 const LeaderboardUserWrapper = styled.div`
@@ -130,21 +131,19 @@ const DetailLine = styled.div`
 class LeaderboardUser extends Component {
 
     static propTypes = {
-        user: PropTypes.object.isRequired,
+        userId: PropTypes.string.isRequired,
+        rank: PropTypes.number.isRequired,
     }
 
     render() {
-        const { user, rank} = this.props
-        const name = this.props.user.name
-        const answered = Object.keys(user.answers).length
-        const created = user.questions.length
+        const { userId, name, answered, created, rank } = this.props
 
         return (
             <LeaderboardUserWrapper>
 
                 <Flag><Rank>#{rank}</Rank></Flag>
 
-                <ImageWrapper><UserImage user={user} size={"85px"}/></ImageWrapper>
+                <ImageWrapper><UserImage userId={userId} size={"85px"}/></ImageWrapper>
 
                 <DetailsWrapper>
                     <DetailLine><h3>{name}</h3></DetailLine>
@@ -165,4 +164,15 @@ class LeaderboardUser extends Component {
 }
 
 
-export default LeaderboardUser
+function mapStateToProps({users}, {userId, rank}){
+    const user = users[userId]
+    return {
+        userId,
+        user,
+        name: user.name,
+        answered: Object.keys(user.answers).length,
+        created: user.questions.length,
+        rank
+    }
+}
+export default connect(mapStateToProps)(LeaderboardUser)

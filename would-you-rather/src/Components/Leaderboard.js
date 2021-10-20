@@ -9,8 +9,8 @@ class Leaderboard extends Component {
         sorted: []
     }
 
-    calculateScore = (userid) => {
-        const userobj = this.props.users[userid]
+    calculateScore = (userId) => {
+        const userobj = this.props.users[userId]
         const score = Object.keys(userobj.answers).length + userobj.questions.length
         return score
     }
@@ -18,24 +18,23 @@ class Leaderboard extends Component {
     componentDidMount() {        
         let unsorted = []
 
-        for (const user in this.props.users) {
-            unsorted.push([user, this.calculateScore(user)])
+        for (const userId in this.props.users) {
+            unsorted.push([userId, this.calculateScore(userId)])
         }
 
         const sorted = unsorted.sort((a,b) => (a[1] > b[1]) ? -1 : 1)
-        // console.log('sorted: ', sorted)
         this.setState({sorted})
     }
 
     render() {
-        const { users } = this.props
+
 
         return (
             <ComponentWrapper>
                 <h2>Current Leaders</h2>
-                {this.state.sorted.map((userkey, rank) => (
-                    <LI key={userkey[0]}>
-                        <LeaderbardUser user={users[userkey[0]]} rank={rank+1}/>
+                {this.state.sorted.map((userTuple, rank) => (
+                    <LI key={userTuple[0]}>
+                        <LeaderbardUser userId={userTuple[0]} rank={rank+1}/>
                     </LI>
                 ))}
             </ComponentWrapper>
