@@ -28,7 +28,6 @@ class Leaderboard extends Component {
 
     render() {
 
-
         return (
             <ComponentWrapper>
                 <h2>Current Leaders</h2>

@@ -70,9 +70,7 @@ function Login (props) {
         newSelectedUser = selectedUser.value
         console.log('new selected user: ', newSelectedUser)
         
-    }
-
-    
+    }    
 
     const handleSubmit = (e) => {
         if(!newSelectedUser){alert('No user selected. Please select a user to sign in.')} 
@@ -113,11 +111,6 @@ function Login (props) {
         </LoginWrapper>
     )
 }
-
-
-
-
-
 
 function mapStateToProps( {authedUser, users}) {
     return {authedUser, users}

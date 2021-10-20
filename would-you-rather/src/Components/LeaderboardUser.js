@@ -15,7 +15,6 @@ import {
 } from './sharedElements'
 import { connect } from 'react-redux'
 
-
 const LeaderboardUserWrapper = styled.div`
     /* display: flex; */
     width: 500px;
@@ -34,7 +33,6 @@ const LeaderboardUserWrapper = styled.div`
     /* padding: 5px 10px; */
     justify-content: space-between;
 `
-
 
 class LeaderboardUser extends Component {
 
@@ -70,7 +68,6 @@ class LeaderboardUser extends Component {
         )
     }   
 }
-
 
 function mapStateToProps({users}, {userId, rank}){
     const user = users[userId]

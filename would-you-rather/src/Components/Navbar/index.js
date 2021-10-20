@@ -9,15 +9,12 @@ import {
     Logo,
     Close,
     Welcome,
-    // LogoutBtn
 } from './NavbarElements';
 import UserImage from '../UserImage'
-
 import Dropdown from './Dropdown';
 import gamelogo from '../../images/logo.png'
 import { connect } from 'react-redux'
 import {signOutUser} from '../../actions/authedUser'
-
 
 const Navbar = (props) => {
     const [isOpen, setIsOpen] =  useState(false)

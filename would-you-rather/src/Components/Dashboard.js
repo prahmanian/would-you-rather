@@ -11,11 +11,9 @@ import { connect } from 'react-redux'
 // Props: authUser (string) - the id of the current user.
 
 const StyledDashboard = styled.div`
-    /* background: palegoldenrod; */
     width: 550px;
     /* max-height: 1000px; */
     overflow: scroll;
-    /* color: blue; */
     margin: 10px auto;
     border: 2px solid lightgrey;
     border-radius: 10px;

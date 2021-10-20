@@ -53,7 +53,6 @@ class AddQuestion extends Component {
     }
 
     render() {
-        // console.log(this.state)
         const { optionOneText, optionTwoText } = this.state
         
         if (this.state.submitted) {
