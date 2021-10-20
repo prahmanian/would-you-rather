@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { NavLink as Link } from 'react-router-dom'
+import { Redirect } from 'react-router-dom' 
 import {
     HR2 as HR,
     Label,
@@ -11,11 +11,13 @@ import {
 import { connect } from 'react-redux'
 import { handleAddQuestion } from '../actions/questions'
 
+
 class AddQuestion extends Component {
 
     state = {
         optionOneText: '',
         optionTwoText: '',
+        submitted: false
     }
 
     handleChangeOptionOne = (e) => {
@@ -32,21 +34,32 @@ class AddQuestion extends Component {
         }))
     }
 
+    redirect = (path) => {
+        return <Redirect to={path} />
+    }
+
     handleSubmit = (e) => {
         e.preventDefault()
         const {optionOneText, optionTwoText} = this.state
         const { dispatch } = this.props
-        //TODO Add Question to Store
-
-        console.log('Opt1: ', optionOneText)
-        console.log('Opt2: ', optionTwoText)
 
         dispatch(handleAddQuestion(optionOneText, optionTwoText))
+        
+        this.setState({
+            optionOneText: '',
+            optionTwoText: '',
+            submitted: true
+        })
     }
 
     render() {
         // console.log(this.state)
-        const { optionOneText, optionTwoText } = this.state 
+        const { optionOneText, optionTwoText } = this.state
+        
+        if (this.state.submitted) {
+            return <Redirect to={'/dashboard'} />
+        }
+
         return (
             <>
                 <Label><h2>Create a New Question</h2></Label>
@@ -59,7 +72,6 @@ class AddQuestion extends Component {
                         <Container><Input id='optionOne' type='text' placeholder='Enter Option One Text Here' value={optionOneText} onChange={this.handleChangeOptionOne}/></Container>
                         <Container><HR /><strong>OR</strong><HR /></Container>
                         <Container><Input id='optionTwo' type='text' placeholder='Enter Option Two Text Here' value={optionTwoText} onChange={this.handleChangeOptionTwo}/></Container>
-                        {/* <Link to="/"><Button type='submit' disabled={optionOneText === '' || optionTwoText === ''}>Submit</Button></Link> */}
                         <Button type='submit' disabled={optionOneText === '' || optionTwoText === ''}>Submit</Button>
                     </form>
 
@@ -74,31 +86,3 @@ function mapStateToProps( {authedUser}) {
 }
 
 export default connect(mapStateToProps)(AddQuestion)
-
-
-
-// function addTodo () {
-//     const input = document.getElementById('todo')
-//     const name = input.value
-//     input.value = ''
-
-//     store.dispatch(addTodoAction({
-//         name,
-//         complete: false,
-//         id: generateId()
-//     }))
-
-// }
-
-// function addGoal () {
-//     const input = document.getElementById('goal')
-//     const name = input.value
-//     input.value = ''
-
-//     store.dispatch(addGoalAction({
-//         name,
-//         id: generateId()
-//     }))
-// }
-
-// document.getElementById('todoBtn').addEventListener('click', addTodo)
