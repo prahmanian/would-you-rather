@@ -52,7 +52,7 @@ const Navbar = (props) => {
 
                         :   <Welcome>
                                 <NavBtn>
-                                    <NavBtnLink to="/login">Login</NavBtnLink>
+                                    <NavBtnLink to="/signup">Signup</NavBtnLink>
                                 </NavBtn>
                             </Welcome>
                         

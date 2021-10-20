@@ -11,6 +11,7 @@ import Question from './components/Question';
 import { connect } from 'react-redux'
 import { handleInitialData } from './actions/shared'
 import LoadingBar from 'react-redux-loading'
+import AddUser from './components/AddUser';
 
 class App extends Component {
 
@@ -39,6 +40,8 @@ class App extends Component {
           <Route exact path='/add'><AddQuestion /></Route>
           <Route exact path='/dashboard'><Dashboard /></Route>
           <Route path='/questions/:id'><Question /></Route>
+          <Route exact path='/signup'><AddUser /></Route>
+
 
         </Switch>
 

@@ -36,7 +36,7 @@ const Dropdown = ({isOpen, toggle, user, dispatch}) => {
                 <DropdownBtnWrapper>
                     {user 
                     ?   <DropdownRoute to='/login' onClick={() => {dispatch(signOutUser())}}>Log Out</DropdownRoute>
-                    :   <DropdownRoute to='/login'>Login</DropdownRoute>
+                    :   <DropdownRoute to='/signup'>Sign Up</DropdownRoute>
                     }
                 </DropdownBtnWrapper>
 

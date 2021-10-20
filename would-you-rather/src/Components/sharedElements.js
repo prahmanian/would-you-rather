@@ -415,15 +415,15 @@ export const RadioSelect = styled.label`
 export class ResultsBar extends Component {
     render () {
         const { answered, total } = this.props
-        const percent = (answered/total*100).toFixed(2)
+        const percent = (answered/total*100).toFixed(1)
         return (
             <>
                 <div className={"bg"}>
                     <div className={"fg"} style={{width: `${percent}%`}} >
                     </div>
-                    {/* <p className={"label"} style={{paddingLeft: `${percent*.9}%`}}>{(answered/total*100).toFixed(0)}%</p> */}
+        
                 </div>
-
+                <span className={"percent"}>{percent}%</span>
                 <strong className={"rb"}>{`${answered} out of ${total} votes`}</strong>
 
             </>

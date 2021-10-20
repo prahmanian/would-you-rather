@@ -80,15 +80,14 @@
   margin: auto 0;
 }
 
-.label {
-  color: white;
+.percent {
+  color: #040404;
   display: flex;
-  justify-content: flex-end;
-  padding-left: 70px;
-  position: absolute;
-  right: -10px;
+  justify-content: center;
+  /* position: absolute; */
+  /* right: -10px; */
   z-index: 2;
-  left: 15px;
+  /* left: 15px; */
 }  
 
 .rb {
