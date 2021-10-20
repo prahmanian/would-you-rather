@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-// import PropTypes from 'prop-types'
-// import UserImage from './UserImage'
 import styled from 'styled-components'
 
 
@@ -50,6 +48,25 @@ export const DetailsWrapper = styled.div`
     padding: 0 5px 0px 10px;
 `
 
+export const SideBorderDetailsWrapper = styled.div`
+    display: flex;
+    background: transparent;
+    color: grey;
+    width: 250px;
+    height: 120px;
+    /* font-size: 2rem; */
+    align-content: center;
+    justify-content: space-between;
+    /* padding: 5px; */
+    border-left : 1px solid lightgray;
+    border-right : 1px solid lightgray;
+    /* border-radius: 5px 5px 5px 5px; */
+    overflow: hidden;
+    margin: auto 5px;
+    flex-direction: column;
+    padding: 10px;
+`
+
 export const Label = styled.div`
     display: block;
     width: 500px;
@@ -60,6 +77,52 @@ export const Label = styled.div`
     position: relative;
     top: 0;
     background: #efefef;
+`
+
+export const ScoreLabel = styled.div`
+    background: #efefef;
+    border-bottom: 1px solid lightgrey;
+    color: #090909;
+    width: 130px;
+    height: 50px;
+    align-content: center;
+    justify-content: center;
+    padding: 10px;
+    text-align: center;
+    position: inherit;
+    top: 8;
+`
+
+export const Score = styled.div`
+    border-radius: 50%;
+    /* position: relative; */
+    background: lightgreen;
+    color: white;
+    width: 50px;
+    height: 50px;
+    font-size: 2rem;
+    /* align-content: center;
+    justify-content: center; */
+    padding: 5px;
+    margin: auto;
+    text-align: center;
+`
+
+export const ScoreWrapper = styled.div`
+    display: flex;
+    /* background: transparent; */
+    /* color: grey; */
+    width: 125px;
+    height: 120px;
+    font-size: 1.5rem;
+    align-content: center;
+    justify-content: space-between;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    overflow: hidden;
+    margin: auto;
+    flex-direction: column;
+
 `
 
 export const BottomWrapper = styled.div`
@@ -99,6 +162,13 @@ export const Container = styled.div`
     /* margin: 10px 0; */
     text-align: left;
 
+`
+
+export const DetailLine = styled.div`
+    display: flex;
+    justify-content: space-between;
+    /* padding: 5px; */
+    width: 100%;
 `
 
 export const Input = styled.input`
@@ -168,6 +238,7 @@ export const OutlineButton = styled.button`
         color: #010606
     }
 `
+
 export const ToggleButton = styled.button`
     width: 50%;
     height: 2.5rem;
@@ -196,6 +267,28 @@ export const ToggleButton = styled.button`
         color: #010606;
     }
 `
+
+export const Flag = styled.div`
+    clip-path: polygon(0% 0%, 100% 0%, 0% 100%, 0% 0%);
+    color: gold;
+    background: grey;
+    display: block;
+    width: 100px;
+    height: 40px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+`
+
+export const Rank = styled.span`
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    z-index: 3;
+`
+
+
 
 export class ResultsBar extends Component {
     render () {
