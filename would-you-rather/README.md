@@ -1,3 +1,42 @@
+# Would You Rather - React-Redux Final Project
+Developer: Pedram Rahmanian
+
+This is my final project for the Udacity React Nanodegree. The objective was to simulate a real-world implementation of React and Redux.
+In this app, I developed a version of the classic 'Would you Rather' game, in which players are tasked to pick between two options.
+
+## Supported Functionality
+The app supports user sign up, switching between users, answering questions as a specific user, asking new questions, and viewing results. The app also provides a real-time leaderboard with scores calculated off user participation.
+
+Data is persisted to a mock database asynchronously.
+
+### Supported Actions
+- SIGN_IN_USER
+- SIGN_OUT_USER
+- ADD_USER
+- ADD_QUESTION
+- SAVE_ANSWER
+
+## Views and Components
+
+### /Dashboard
+The Dashboard component serves as the root for a loged in user. A toggleable view presents unanswered / answered questions, rendering a preview with a link to open the question.
+
+
+### /Questions/:id
+The Question component displays the full content of a question in an interactable view. Users can submit their vote which dispatches the SAVE_ANSWER action (this is irreversable). Once a user has submited a response to a specific question, the results of that question will be displayed.
+
+### /Login
+The Login component allows one to select a user to play as. On submit, the SIGN_IN_USER action is dispatched and the user is redirected to the dashboard.
+
+### /Signup
+The Signup component allows for the creation of a new user. It dispatches the ADD_USER action.
+
+### /Add
+The AddQuestion component allows an euthenticated user to post a new question to the game. 
+
+### /Leaderboard
+The Leaderboard component displays users in decreasing order of engagement, calculated as the number of questions asked and answered by that user. No actions get dispatched by this component.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
