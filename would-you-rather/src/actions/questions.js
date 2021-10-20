@@ -1,9 +1,10 @@
-import { _saveQuestion } from '../starter/_DATA'
+import { _saveQuestion, _saveQuestionAnswer} from '../starter/_DATA'
 import { showLoading, hideLoading } from 'react-redux-loading'
 
 
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS'
 export const ADD_QUESTION = 'ADD_QUESTION'
+export const SAVE_ANSWER = 'SAVE_ANSWER'
 
 export function receiveQuestions (questions) {
     return {
@@ -31,6 +32,31 @@ export function handleAddQuestion (optionOneText, optionTwoText) {
             author: authedUser
         })
             .then((question) => dispatch(addQuestion(question)))
+            .then(() => dispatch(hideLoading()))
+    }
+}
+
+function saveAnswer (authedUser, qid, answer) {
+    return {
+        type: SAVE_ANSWER,
+        authedUser,
+        qid,
+        answer,
+    }
+}
+
+export function handleSaveAnswer (qid, answer) {
+    return (dispatch, getState) => {
+        const {authedUser} = getState()
+
+        dispatch(showLoading())
+
+        return  _saveQuestionAnswer ({ 
+            authedUser,
+            qid,
+            answer,
+        })
+            .then(() => dispatch(saveAnswer(authedUser, qid, answer)))
             .then(() => dispatch(hideLoading()))
     }
 }

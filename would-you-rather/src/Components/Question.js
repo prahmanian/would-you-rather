@@ -6,6 +6,7 @@ import UserImage from './UserImage'
 import {ResultsBar} from './sharedElements'
 import {withRouter} from 'react-router'
 import { connect } from 'react-redux'
+import { handleSaveAnswer } from '../actions/questions'
 
 
 
@@ -163,7 +164,7 @@ class Question extends Component {
         Object.keys(userObj.answers).includes(id) && this.setState({answer: userObj.answers[id]})
     }
 
-    handleSubmit(e) {
+    handleSubmit = (e) => {
         e.preventDefault()
         let data = new FormData(document.querySelector("form"))
         let answer = "";
@@ -171,22 +172,18 @@ class Question extends Component {
             answer = entry[1];
         };
         console.log('answer: ', answer)
+        // this.setState({answer})
+        this.props.dispatch(
+            handleSaveAnswer(this.props.id, answer)
+        )
         this.setState({answer})
     }
 
-    render() {
-        const { authedUser, users, questions } = this.props
-        const userObj = users[authedUser]
-        const id = this.props.match.params.id
-        // const id = "test"
-        const question = questions[id]
-        console.log('question ', question)
-        console.log('props ', this.props)
 
-        const optionOneText = question ? question.optionOne.text : 'error'
-        const optionTwoText = question ? question.optionTwo.text : 'error'
-        const optionOneVotes = question.optionOne.votes.length
-        const optionTwoVotes = question.optionTwo.votes.length
+
+
+    render() {
+        const { authedUser, question, id, userObj, optionOneText, optionTwoText, optionOneVotes, optionTwoVotes} = this.props
 
         const classResultsOpt1 = this.state.answer === "optionOne" ? "selected" : "notselected"
         const classResultsOpt2 = this.state.answer === "optionTwo" ? "selected" : "notselected"
@@ -204,7 +201,7 @@ class Question extends Component {
                 <BottomWrapper>
 
                     <ImageWrapper>
-                        <UserImage user={userObj} size={"120px"}/>
+                        <UserImage userId={userObj.id} size={"120px"}/>
                     </ImageWrapper>
 
                     {
@@ -218,6 +215,7 @@ class Question extends Component {
 
                                 <ResultsContainer className={classResultsOpt1}>
                                     {this.state.answer === 'optionOne' && <YourVote>Your Vote</YourVote>}
+                                    {console.log('opt1text', optionOneText)}
                                     <p className="Q">{optionOneText}</p>
                                     <ResultsBar answered={optionOneVotes} total={(optionOneVotes+optionTwoVotes)} />
                                 </ResultsContainer>
@@ -235,7 +233,7 @@ class Question extends Component {
                         :
                             <DetailsWrapper>
                                 <p className="title">Would you rather . . .</p>
-                                <form id={`selector`}>
+                                <form id={`selector`} onSubmit={this.handleSubmit}>
                                     <Container>
                                         <Select className="labl" htmlFor={id+"opt1"}>
                                             <input type="radio" id={id+"opt1"} name={id} value="optionOne" className="inputtest" />
@@ -254,7 +252,7 @@ class Question extends Component {
                                     </Container>
 
                                     <Button
-                                        onClick={this.handleSubmit}
+                                        // onClick={this.handleSubmit}
                                     >Submit</Button>
                                 </form>
                                 
@@ -273,8 +271,26 @@ class Question extends Component {
     }
 }
 
-function mapStateToProps( {authedUser, users, questions}) {
-    return {authedUser, users, questions}
+function mapStateToProps( {authedUser, users, questions}, props) {
+    const {id} = props.match.params
+    const question = questions[id]
+
+
+
+        
+    return {
+        id,
+        authedUser, 
+        users, 
+        questions,
+        userObj: users[question.author],
+        optionOneText: question ? question.optionOne.text : 'error',
+        optionTwoText: question ? question.optionTwo.text : 'error',
+        optionOneVotes: question.optionOne.votes.length,
+        optionTwoVotes: question.optionTwo.votes.length,
+
+
+    }
 }
 
 export default withRouter(connect(mapStateToProps)(Question))
