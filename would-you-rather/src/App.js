@@ -1,7 +1,6 @@
 import './App.css';
 import React, {Component} from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
-import {users, questions} from './starter/_DATA'
 import Navbar from './components/Navbar';
 import Login from './components/Login';
 import Leaderboard from './components/Leaderboard'
@@ -11,6 +10,7 @@ import Dashboard from './components/Dashboard'
 
 import { connect } from 'react-redux'
 import { handleInitialData } from './actions/shared'
+import LoadingBar from 'react-redux-loading'
 
 class App extends Component {
 
@@ -19,17 +19,13 @@ class App extends Component {
   }
 
   render() {
-    // const store = {
-    //   authedUser: 'tylermcginnis',
-    //   users,
-    //   questions
-    // }
 
     console.log(this.props)
     return (
       <div className="App">
 
         <Navbar />
+        <LoadingBar />
 
         <Switch>
 
