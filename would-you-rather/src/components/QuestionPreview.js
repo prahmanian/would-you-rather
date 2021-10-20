@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 import { NavLink as Link } from 'react-router-dom'
 import { ImageWrapper,  DetailsWrapper, Label, BottomWrapper, OutlineButton as Button} from './sharedElements'
 import UserImage from './UserImage'
@@ -14,9 +14,9 @@ import { connect } from 'react-redux'
 
 class QuestionPreview extends Component {
 
-    static propTypes = {
-        id: PropTypes.string.isRequired,
-    }
+    // static propTypes = {
+    //     id: PropTypes.string.isRequired,
+    // }
 
     render() {
         const { id, authorId, authorName, optionOneText, optionTwoText } = this.props
