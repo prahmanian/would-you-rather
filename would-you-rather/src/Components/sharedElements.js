@@ -164,6 +164,17 @@ export const Container = styled.div`
 
 `
 
+export const Container330 = styled.div`
+    display: flex;
+    width: 330px;
+    align-content: center;
+    justify-content: center;
+    /* overflow: hidden; */
+    margin: 10px 0;
+    text-align: left;
+
+`
+
 export const DetailLine = styled.div`
     display: flex;
     justify-content: space-between;
@@ -196,6 +207,26 @@ export const SolidButton = styled.button`
         transition: all 0.2s ease-in-out;
         background: transparent;
         color: #010606;
+    }
+`
+
+export const BlueButton = styled.button`
+    width: 100%;
+    height: 2rem;
+    border-radius: 5px;
+    margin: 5px 0;
+    background: #256ce1;
+    color: #fff;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    text-decoration: none;
+
+    &:hover {
+        transition: all 0.2s ease-in-out;
+        background: lightgreen;
+        color: #010606
     }
 `
 
@@ -293,7 +324,93 @@ export const Rank = styled.span`
     z-index: 3;
 `
 
+export const YourVote = styled.div`
+    width: 45px;
+    height: 45px;
+    border-radius: 25px;
+    background: yellowgreen;
+    color: white;
+    font-size: 0.75rem;
+    justify-content: center;
+    text-align: center;
+    align-content: center;
+    padding-top: 5px;
+    position: absolute;
+    top: -22px;
+    right: -22px;
+`
 
+export const ResultsContainer = styled.div`
+    display: flex;
+    width: 330px;
+    align-content: center;
+    justify-content: space-between;
+    /* overflow: hidden; */
+    margin: 5px 0;
+    text-align: left;
+    flex-direction: column;
+    position: relative;
+    padding: 10px;
+    border-radius: 5px;
+
+    &.selected {
+        color: green;
+        background: #c0edc0;
+        border: 2px solid #88cc00;
+
+    }
+
+    &.notselected {
+        color: gray;
+        background: #f2f2f2;
+        border: 2px solid lightgrey;
+
+    }
+
+    & p {
+        /* color: purple; */
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+    }
+`
+
+export const RadioSelect = styled.label`
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    
+    > input{ /* HIDE RADIO */
+        visibility: hidden; /* Makes input not-clickable */
+        position: absolute; /* Remove input from document flow */
+    }
+
+    > input + div { /* DIV STYLES */
+        cursor: pointer;
+        border: 1px solid lightgrey;
+        border-radius: 5px;
+        padding: 5px 0;
+        transition: all 0.2s ease-in-out;
+        padding-left: 10px;
+
+    }
+
+    > input:hover + div { /* DIV HOVER STYLES */
+        cursor: pointer;
+        border: 1px solid #256ce1;
+        background: #9ec3ff;
+        border-radius: 5px;
+        padding: 5px 0;
+        transition: all 0.2s ease-in-out;
+        padding-left: 10px;
+
+    }
+
+    > input:checked + div { /* (RADIO CHECKED) DIV STYLES */
+        background-color: #dbfcdb;
+        border: 2px solid lightgreen;
+    }
+
+`
 
 export class ResultsBar extends Component {
     render () {
