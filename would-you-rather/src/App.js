@@ -7,7 +7,7 @@ import Leaderboard from './components/Leaderboard'
 import AddQuestion from './components/AddQuestion'
 import Dashboard from './components/Dashboard'
 import Question from './components/Question';
-
+import NotFound from './components/NotFound';
 import { connect } from 'react-redux'
 import { handleInitialData } from './actions/shared'
 import LoadingBar from 'react-redux-loading'
@@ -40,7 +40,10 @@ class App extends Component {
           <Route exact path='/add'><AddQuestion /></Route>
           <Route exact path='/dashboard'><Dashboard /></Route>
           <Route path='/questions/:id'><Question /></Route>
+          <Route path='/questions'><Redirect to='/dashboard' /></Route>
           <Route exact path='/signup'><AddUser /></Route>
+
+          <Route path="*"> <NotFound /> </Route>
 
 
         </Switch>
