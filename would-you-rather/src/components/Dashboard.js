@@ -56,9 +56,12 @@ class Dashboard extends Component {
     render () {
         const { questionIds, userAnswers } = this.props
         console.log('userAnswers ', userAnswers)
-        const filteredQuestions = this.state.display === 'unanswered'
+        let filteredQuestions = this.state.display === 'unanswered'
             ? questionIds.filter((id) => !userAnswers.includes(id))
             : questionIds.filter((id) => userAnswers.includes(id))
+
+        //sort with newest questions at top
+        filteredQuestions.sort((a,b) => (a.timestamp > b.timestamp) ? 1 : -1)
 
         return (
             <StyledDashboard>
@@ -80,7 +83,7 @@ class Dashboard extends Component {
 
                 <div className="ul">
                     <ul>
-                        {filteredQuestions.map((id) => (<li key={id}><QuestionPreview id={id} /></li>))}
+                        {filteredQuestions.map((id) => (<li key={id}><QuestionPreview id={id} />{console.log(id, this.props.questions[id].timestamp, new Date(this.props.questions[id].timestamp))}</li>))}
                     </ul>
                 </div>
                 
@@ -94,6 +97,7 @@ function mapStateToProps({authedUser, users, questions}){
     return {
         userAnswers: Object.keys(users[authedUser].answers),
         questionIds: Object.keys(questions),
+        questions
     }
 }
 
