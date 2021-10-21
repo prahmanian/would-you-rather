@@ -34,7 +34,7 @@ export const Bars =styled(FaBars)`
     color: #fff;
     z-index: 10000;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 868px) {
         display: block;
         position: absolute;
         top: 0;
@@ -50,7 +50,7 @@ export const Close =styled(FaTimes)`
     color: #fff;
     z-index: 10000;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 868px) {
         display: block;
         position: absolute;
         top: 0;
@@ -91,7 +91,7 @@ export const NavMenu = styled.div`
     white-space: nowrap;
 
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 868px) {
         display: none;
     }
 `
@@ -104,7 +104,7 @@ export const NavBtn = styled.nav`
     justify-content: flex-end;
     width: 100vw;
 
-    @media screen and (Max-width: 768px) {
+    @media screen and (Max-width: 868px) {
         display: none;
     }
 `
@@ -141,7 +141,7 @@ export const Welcome = styled.div`
 
     white-space: nowrap;
 
-    @media screen and (Max-width: 768px) {
+    @media screen and (Max-width: 868px) {
         display: none;
     }
 
@@ -155,7 +155,7 @@ export const LogoutBtn = styled.button`
     justify-content: flex-end;
     width: 100vw;
 
-    @media screen and (Max-width: 768px) {
+    @media screen and (Max-width: 868px) {
         display: none;
     }
 `
