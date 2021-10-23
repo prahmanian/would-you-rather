@@ -76,6 +76,7 @@ function Login (props) {
         if(!newSelectedUser){alert('No user selected. Please select a user to sign in.')} 
         else{
             props.dispatch(signInUser(newSelectedUser))
+            localStorage.setItem('would-you-rather-authedUser', JSON.stringify(newSelectedUser));
             history.push('/dashboard');
         }
         e.preventDefault()

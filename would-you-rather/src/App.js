@@ -9,14 +9,24 @@ import Dashboard from './components/Dashboard'
 import Question from './components/Question';
 import NotFound from './components/NotFound';
 import { connect } from 'react-redux'
-import { handleInitialData } from './actions/shared'
+import { handleInitialData, handleLoadFromSession } from './actions/shared'
 import LoadingBar from 'react-redux-loading'
 import AddUser from './components/AddUser';
 
 class App extends Component {
 
   componentDidMount() {
-    this.props.dispatch(handleInitialData())
+    const localUsers = JSON.parse(localStorage.getItem('would-you-rather-users'))
+
+    if (!localUsers) {
+      console.log("Initial Data Load")
+      this.props.dispatch(handleInitialData())
+    }
+
+    else if (Object.keys(localUsers).length > 0) {
+      console.log("Data Loaded from Local Storage")
+      this.props.dispatch(handleLoadFromSession())
+    }
   }
 
   render() {
@@ -55,6 +65,7 @@ class App extends Component {
 
 }
 
-
-
-export default connect(({authedUser}) => ({authedUser}))(App);
+function mapStateToProps({authedUser, users}){
+    return {authedUser, users}
+}
+export default connect(mapStateToProps)(App)

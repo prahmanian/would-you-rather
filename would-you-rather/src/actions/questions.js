@@ -33,6 +33,10 @@ export function handleAddQuestion (optionOneText, optionTwoText) {
         })
             .then((question) => dispatch(addQuestion(question)))
             .then(() => dispatch(hideLoading()))
+            .then(() => {
+                const state = getState()
+                localStorage.setItem('would-you-rather-questions', JSON.stringify(state.questions));
+            })
     }
 }
 
@@ -58,5 +62,10 @@ export function handleSaveAnswer (qid, answer) {
         })
             .then(() => dispatch(saveAnswer(authedUser, qid, answer)))
             .then(() => dispatch(hideLoading()))
+            .then(() => {
+                const state = getState()
+                localStorage.setItem('would-you-rather-questions', JSON.stringify(state.questions));
+                localStorage.setItem('would-you-rather-users', JSON.stringify(state.users));
+            })
     }
 }

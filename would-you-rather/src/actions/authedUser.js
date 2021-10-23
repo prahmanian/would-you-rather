@@ -16,3 +16,14 @@
             type: SIGN_OUT_USER
         }
     }
+
+
+    //Signin
+    export const SIGN_IN_SESSION_USER = "SIGN_IN_SESSION_USER"
+
+    export function signInSessionUser (userId) {
+        return {
+            type: SIGN_IN_SESSION_USER,
+            userId
+        }
+    }

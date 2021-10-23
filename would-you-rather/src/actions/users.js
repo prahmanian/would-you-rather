@@ -31,5 +31,9 @@ export function handleAddUser (name, avatarURL) {
         })
             .then((user) => dispatch(addUser(user)))
             .then(() => dispatch(hideLoading()))
+            .then(() => {
+                const state = getState()
+                localStorage.setItem('would-you-rather-users', JSON.stringify(state.users));
+            })
     }
 }

@@ -4,5 +4,10 @@ import { applyMiddleware } from 'redux'
 
 export default applyMiddleware(
     thunk,
-    logger,
+    // logger,
 )
+
+export const middlewares = [
+    thunk,
+    logger,
+]

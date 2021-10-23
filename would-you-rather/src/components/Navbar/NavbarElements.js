@@ -130,16 +130,22 @@ export const NavBtnLink = styled(Link)`
 export const Welcome = styled.div`
     color: white;
     display: inline-flex;
-    width: 400px;
+    width: 110%;
     height: 100%;
-
     align-items: center;
-    /* margin-right: -24px; */
     justify-content: space-between;
-    padding: 10px 22px;
-
-
+    justify-content: flex-end;
+    padding: 10px 10px 10px 20px;
+    margin-left: 10px;
     white-space: nowrap;
+
+    p {
+        margin-right: 10px;
+    }
+
+    .navBtn {
+        margin-left: 10px;
+    }
 
     @media screen and (Max-width: 868px) {
         display: none;

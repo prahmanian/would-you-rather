@@ -4,7 +4,6 @@ import {
     NavLink,
     Bars,
     NavMenu,
-    NavBtn,
     NavBtnLink,
     Logo,
     Close,
@@ -42,22 +41,22 @@ const Navbar = (props) => {
                     <NavLink to="/leaderboard" > Leader Board </NavLink>
                 </NavMenu>
 
-                <div>
-                    {user
-                        ?   <Welcome>
-                                <p>Hello, {user.name}!</p>
-                                <UserImage userId={user.id} size={"40px"} />
-                                <NavBtnLink to="/login" onClick={() => {props.dispatch(signOutUser())}}>Log Out</NavBtnLink>
-                            </Welcome>
+                {console.log("user: ", user)}
+                {user
+                    ?   <Welcome>
+                            <p>Hello, {user.name}!</p>
+                            <UserImage className={"navAvatar"} userId={user.id} size={"40px"} />
+                            <NavBtnLink className={"navBtn"} to="/login" onClick={() => {
+                                props.dispatch(signOutUser())
+                                localStorage.setItem('would-you-rather-authedUser', null)
+                                }}>Log Out</NavBtnLink>
+                        </Welcome>
 
-                        :   <Welcome>
-                                <NavBtn>
-                                    <NavBtnLink to="/signup">Signup</NavBtnLink>
-                                </NavBtn>
-                            </Welcome>
-                        
-                    }
-                </div>
+                    :   <Welcome>
+                            <NavBtnLink className={"navBtn"} to="/signup">Signup</NavBtnLink>
+                        </Welcome>
+                    
+                }
 
                 
 
@@ -66,8 +65,8 @@ const Navbar = (props) => {
     )
 }
 
-function mapStateToProps( {users, authedUser}) {
-    return {user: users[authedUser]}
+function mapStateToProps( {users, authedUser}, {clearSessionUser}) {
+    return {user: users[authedUser], clearSessionUser}
 }
 
 export default connect(mapStateToProps)(Navbar)
