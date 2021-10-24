@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom' 
 import {
-    HR2 as HR,
     Label,
     LinkButton as Button,
     BottomWrapperColumn,
