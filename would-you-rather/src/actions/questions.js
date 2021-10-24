@@ -54,18 +54,33 @@ export function handleSaveAnswer (qid, answer) {
         const {authedUser} = getState()
 
         dispatch(showLoading())
+        
 
-        return  _saveQuestionAnswer ({ 
+        try {_saveQuestionAnswer ({ 
             authedUser,
             qid,
             answer,
-        })
-            .then(() => dispatch(saveAnswer(authedUser, qid, answer)))
-            .then(() => dispatch(hideLoading()))
-            .then(() => {
-                const state = getState()
-                localStorage.setItem('would-you-rather-questions', JSON.stringify(state.questions));
-                localStorage.setItem('would-you-rather-users', JSON.stringify(state.users));
-            })
-    }
-}
+        })}
+        catch (error) {
+            error.preventDefault()
+            console.log(error)
+        }
+        finally {
+            dispatch(saveAnswer(authedUser, qid, answer))
+            dispatch(hideLoading())
+
+            const state = getState()
+            localStorage.setItem('would-you-rather-questions', JSON.stringify(state.questions));
+            localStorage.setItem('would-you-rather-users', JSON.stringify(state.users));
+
+        }
+
+    //         // .then(() => dispatch(saveAnswer(authedUser, qid, answer)))
+    //         .then(() => dispatch(hideLoading()))
+    //         .then(() => {
+    //             const state = getState()
+    //             localStorage.setItem('would-you-rather-questions', JSON.stringify(state.questions));
+    //             localStorage.setItem('would-you-rather-users', JSON.stringify(state.users));
+    //         })
+    // }
+}}
