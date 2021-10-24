@@ -6,15 +6,25 @@ contact: prahmanian @gmail .com
 This is my final project for the Udacity React Nanodegree. The objective was to simulate a real-world implementation of React and Redux.
 In this app, I developed a version of the classic 'Would you Rather' game, in which players are tasked to pick between two options.
 
-## Getting Started
+## About This App
+This app is a version of the classic 'Would you Rather...' game. It features a list of questions asking the player which of two options they would rather pick. Players are only allowed to answer a question once, so once submitted it is locked in. Players can both ask new questions and answer existing questions. A player's score is the number of questions asked and answered. The current rankings are displayed on our leaderboard page.
+
+
+## Installation and Startup
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 At the project directory in the terminal, you can install the dependencies by running the command `yarn install`.
 Once all dependencies are installed, you can start the development server by running the `yarn start` command.
 
+```bash
+yarn install
+yarn start
+```
+
 ## Supported Functionality
 The app supports user sign up, switching between users, answering questions as a specific user, asking new questions, and viewing results. The app also provides a real-time leaderboard with scores calculated off user participation.
 
-Data is persisted to a mock database asynchronously.
+## Data Persistence
+The initial data is loaded from the given starter files. This app leverages localStorage to persist the state of our redux store, allowing for an improved UX when reloading the page from the browser or directly accessing a path. When a user directly access a path without being authenticated, they are rerouted to login and upon authentication are rerouted back to their rquested path.
 
 ### Supported Actions
 - SIGN_IN_USER
