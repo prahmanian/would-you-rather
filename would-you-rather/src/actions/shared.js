@@ -35,31 +35,17 @@ export function handleInitialData () {
     }
 }
 
-// export function handleLoadFromSession () {
-//     return (dispatch) => {
-//         dispatch(showLoading())
-//         const sessionUser = JSON.parse(localStorage.getItem('authedUser'));
-//         const users = JSON.parse(localStorage.getItem('users'));
-//         const questions = JSON.parse(localStorage.getItem('questions'));
-//         return () => {
-//                 dispatch(receiveUsers(users))
-//                 dispatch(receiveQuestions(questions))
-//                 dispatch(signInSessionUser(sessionUser))
-//                 dispatch(hideLoading())
-//             }
-//     }
-// }
 
 export function handleLoadFromSession () {
     return (dispatch) => {
         dispatch(showLoading())
-        const sessionUser = JSON.parse(localStorage.getItem('authedUser'));
+        const sessionUser = JSON.parse(localStorage.getItem('would-you-rather-authedUser'));
         const users = JSON.parse(localStorage.getItem('would-you-rather-users'));
         const questions = JSON.parse(localStorage.getItem('would-you-rather-questions'));
-
+        dispatch(signInSessionUser(sessionUser))
         dispatch(receiveUsers(users))
         dispatch(receiveQuestions(questions))
-        dispatch(signInSessionUser(sessionUser))
+        
         dispatch(hideLoading())
 
     }
