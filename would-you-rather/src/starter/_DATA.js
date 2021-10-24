@@ -1,3 +1,5 @@
+// starting Data
+
 let users = {
   sarahedo: {
     id: 'sarahedo',
@@ -114,6 +116,13 @@ let questions = {
     }
   },
 }
+
+// Load Persisted Data
+const localUsers = JSON.parse(localStorage.getItem('would-you-rather-users'))
+users = localUsers ? localUsers : users
+
+const localQuestions = JSON.parse(localStorage.getItem('would-you-rather-questions'))
+questions = localQuestions ? localQuestions : questions
 
 function generateUID () {
   return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
