@@ -1,44 +1,40 @@
-import React, { Component } from 'react'
+import React from 'react'
 import LeaderbardUser from './LeaderboardUser'
 import { ComponentWrapper, LI} from './sharedElements'
 import { connect } from 'react-redux'
 
-class Leaderboard extends Component {
 
-    state = {
-        sorted: []
-    }
+function Leaderboard (props) {
+    const { users } = props
 
-    calculateScore = (userId) => {
-        const userobj = this.props.users[userId]
+    const calculateScore = (userId) => {
+        const userobj = users[userId]
         const score = Object.keys(userobj.answers).length + userobj.questions.length
         return score
     }
-    
-    componentDidMount() {        
-        let unsorted = []
 
-        for (const userId in this.props.users) {
-            unsorted.push([userId, this.calculateScore(userId)])
-        }
+    let unsorted = []
 
-        const sorted = unsorted.sort((a,b) => (a[1] > b[1]) ? -1 : 1)
-        this.setState({sorted})
+    // creating unsorted list of tuples, [userId, score]
+    for (const userId in users) {
+        unsorted.push([userId, calculateScore(userId)])
     }
 
-    render() {
+    // descending sort with the highest score at the top
+    const sorted = unsorted.sort((a,b) => (a[1] > b[1]) ? -1 : 1)
 
         return (
             <ComponentWrapper>
                 <h2>Current Leaders</h2>
-                {this.state.sorted.map((userTuple, rank) => (
+                {/* Rendering soreted list of LeaderboardUser components */}
+                {sorted.map((userTuple, rank) => (
                     <LI key={userTuple[0]}>
                         <LeaderbardUser userId={userTuple[0]} rank={rank+1}/>
                     </LI>
                 ))}
             </ComponentWrapper>
         )
-    }   
+
 }
 
 function mapStateToProps({users}){
