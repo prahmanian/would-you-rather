@@ -41,11 +41,11 @@ const Navbar = (props) => {
                     <NavLink to="/leaderboard" > Leader Board </NavLink>
                 </NavMenu>
 
-                {console.log("user: ", user)}
                 {user
                     ?   <Welcome>
                             <p>Hello, {user.name}!</p>
                             <UserImage className={"navAvatar"} userId={user.id} size={"40px"} />
+                            {/* Logout Button */}
                             <NavBtnLink className={"navBtn"} to="/login" onClick={() => {
                                 props.dispatch(signOutUser())
                                 localStorage.setItem('would-you-rather-authedUser', null)
@@ -65,8 +65,8 @@ const Navbar = (props) => {
     )
 }
 
-function mapStateToProps( {users, authedUser}, {clearSessionUser}) {
-    return {user: users[authedUser], clearSessionUser}
+function mapStateToProps( {users, authedUser}) {
+    return {user: users[authedUser]}
 }
 
 export default connect(mapStateToProps)(Navbar)
