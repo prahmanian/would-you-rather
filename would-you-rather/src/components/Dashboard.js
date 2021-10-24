@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import QuestionPreview from './QuestionPreview'
 import {ToggleButton as Button} from './sharedElements'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router'
 
 // The Dashboard Component serves as our root for a signed in user.
 // The dashboard displays two lists of question previews answered and unanswered by the current user.
@@ -54,8 +55,12 @@ class Dashboard extends Component {
     }
 
     render () {
-        const { questionIds, userAnswers } = this.props
-        console.log('userAnswers ', userAnswers)
+        const { authedUser, users, questions } = this.props
+        if (!authedUser) { return <Redirect to='/' />}
+
+        const userAnswers = Object.keys(users[authedUser].answers)
+        const questionIds = Object.keys(questions)
+
         let filteredQuestions = this.state.display === 'unanswered'
             ? questionIds.filter((id) => !userAnswers.includes(id))
             : questionIds.filter((id) => userAnswers.includes(id))
@@ -83,7 +88,9 @@ class Dashboard extends Component {
 
                 <div className="ul">
                     <ul>
-                        {filteredQuestions.map((id) => (<li key={id}><QuestionPreview id={id} />{console.log(id, this.props.questions[id].timestamp, new Date(this.props.questions[id].timestamp))}</li>))}
+                        {filteredQuestions.map((id) => (<li key={id}><QuestionPreview id={id} />
+                        {/* {console.log(id, this.props.questions[id].timestamp, new Date(this.props.questions[id].timestamp))} */}
+                        </li>))}
                     </ul>
                 </div>
                 
@@ -95,9 +102,9 @@ class Dashboard extends Component {
 function mapStateToProps({authedUser, users, questions}){
 
     return {
-        userAnswers: Object.keys(users[authedUser].answers),
-        questionIds: Object.keys(questions),
-        questions
+        authedUser,
+        users,
+        questions,
     }
 }
 
