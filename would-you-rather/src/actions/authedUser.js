@@ -27,3 +27,13 @@
             userId
         }
     }
+
+    //Automatic Signin
+    export const AUTO_SIGN_IN_USER = "AUTO_SIGN_IN_USER"
+
+    export function autoSignInUser (userId) {
+        return {
+            type: AUTO_SIGN_IN_USER,
+            userId
+        }
+    }
