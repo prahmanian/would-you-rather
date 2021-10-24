@@ -7,11 +7,13 @@ import Leaderboard from './components/Leaderboard'
 import AddQuestion from './components/AddQuestion'
 import Dashboard from './components/Dashboard'
 import Question from './components/Question';
-import NotFound from './components/NotFound';
+import NotFound from './components/utils/NotFound';
 import { connect } from 'react-redux'
 import { handleInitialData, handleLoadFromSession } from './actions/shared'
 import LoadingBar from 'react-redux-loading'
 import AddUser from './components/AddUser';
+import PrivateRoute from './components/utils/PrivateRoute'
+import Refresh from './components/utils/Refresh'
 
 class App extends Component {
 
@@ -30,8 +32,6 @@ class App extends Component {
   }
 
   render() {
-
-    console.log(this.props)
     return (
       <div className="App">
 
@@ -46,17 +46,19 @@ class App extends Component {
           </Route>
 
           <Route exact path='/login'><Login /></Route>
-          <Route exact path='/leaderboard'><Leaderboard /></Route>
-          <Route exact path='/add'><AddQuestion /></Route>
-          <Route exact path='/dashboard'><Dashboard /></Route>
-          <Route path='/questions/:id'><Question /></Route>
-          <Route path='/questions'><Redirect to='/dashboard' /></Route>
+          <PrivateRoute exact path='/leaderboard'><Leaderboard /></PrivateRoute>
+          <PrivateRoute exact path='/add'><AddQuestion /></PrivateRoute>
+          <PrivateRoute exact path='/dashboard'><Dashboard /></PrivateRoute>
+          <PrivateRoute path='/questions/:id'><Question /></PrivateRoute>
+          <PrivateRoute path='/questions'><Redirect to='/dashboard' /></PrivateRoute>
           <Route exact path='/signup'><AddUser /></Route>
 
+          <Route path='/refresh/:path'><Refresh /></Route>
           <Route path="*"> <NotFound /> </Route>
 
 
         </Switch>
+
 
 
       </div>
