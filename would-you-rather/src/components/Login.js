@@ -6,7 +6,7 @@ import { Label, BottomWrapperColumn, SolidButton as Button } from './sharedEleme
 import gamelogo from '../images/logo.png'
 import { connect } from 'react-redux'
 import { signInUser } from '../actions/authedUser'
-import { useHistory } from 'react-router-dom' 
+import { useHistory, useLocation, Redirect } from 'react-router-dom' 
 
 // This Login Component is a lightweight interface for users to sign in to our application.
 // At this point, no user authentication is implemented.
@@ -60,6 +60,15 @@ const StyledSelect = styled(Select)`
 
 
 function Login (props) {
+    const [
+        redirectToReferrer,
+        setRedirectToReferrer
+    ] = React.useState(false)
+
+    const { state } = useLocation()
+
+
+
     const history = useHistory()
     //check if authedUser exists and redirect to dahsboard if so
     if (props.authedUser) { history.push('/dashboard')}
@@ -77,9 +86,13 @@ function Login (props) {
         else{
             props.dispatch(signInUser(newSelectedUser))
             localStorage.setItem('would-you-rather-authedUser', JSON.stringify(newSelectedUser));
-            history.push('/dashboard');
+            setRedirectToReferrer(true)
         }
         e.preventDefault()
+    }
+
+    if (redirectToReferrer === true) {
+        return <Redirect to={state?.from || '/'} />
     }
 
     const options = []
@@ -113,8 +126,8 @@ function Login (props) {
     )
 }
 
-function mapStateToProps( {authedUser, users}) {
-    return {authedUser, users}
+function mapStateToProps( {authedUser, users}, {Auth}) {
+    return {authedUser, users, Auth}
 }
 
 export default connect(mapStateToProps)(Login)
