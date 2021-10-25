@@ -4,7 +4,9 @@ import { connect } from 'react-redux'
 
 
 function PrivateRoute({ children, ...rest}) {
-    const isAuthenticated = (JSON.parse(localStorage.getItem('would-you-rather-authedUser')))
+    // console.log('children: ', children._self.props.authedUser)
+    // const isAuthenticated = (JSON.parse(localStorage.getItem('would-you-rather-authedUser')))
+    const isAuthenticated = children._self.props.authedUser
     return (
     <Route {...rest} render={({location}) => {
         return (isAuthenticated)

@@ -6,7 +6,7 @@ import { Label, BottomWrapperColumn, SolidButton as Button } from './sharedEleme
 import gamelogo from '../images/logo.png'
 import { connect } from 'react-redux'
 import { signInUser } from '../actions/authedUser'
-import { useHistory, useLocation, Redirect } from 'react-router-dom' 
+import { useLocation, Redirect } from 'react-router-dom' 
 
 // This Login Component is a lightweight interface for users to sign in to our application.
 // At this point, no user authentication is implemented.
@@ -69,9 +69,8 @@ function Login (props) {
 
 
 
-    const history = useHistory()
-    //check if authedUser exists and redirect to dahsboard if so
-    if (props.authedUser) { history.push('/dashboard')}
+    //check if authedUser exists and redirect to referrer or dahsboard if so
+    if (props.authedUser) { return <Redirect to={state?.from || '/'} />}
 
     let newSelectedUser = null
     

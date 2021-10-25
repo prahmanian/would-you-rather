@@ -16,6 +16,7 @@ import {ResultsBar} from './sharedElements'
 import {withRouter} from 'react-router'
 import { connect } from 'react-redux'
 import { handleSaveAnswer } from '../actions/questions'
+// import { Redirect } from 'react-router-dom'
 
 class Question extends Component {
 
@@ -24,11 +25,15 @@ class Question extends Component {
     }
 
     componentDidMount() {
-        const { authedUser, users } = this.props
-        const userObj = users[authedUser]
-        const id = this.props.match.params.id
-        //If user has answered the question, we updated the state to reflect their response
-        Object.keys(userObj.answers).includes(id) && this.setState({answer: userObj.answers[id]})
+        // const { authedUser, users } = this.props
+        // const userObj = users[authedUser]
+        // const id = this.props.match.params.id
+        // //If user has answered the question, we updated the state to reflect their response
+        // Object.keys(userObj.answers).includes(id) && this.setState({answer: userObj.answers[id]})
+    
+        // if (! this.props.users) {return <Redirect to={`/refresh/${this.props.location.pathname}`}/> }
+
+    
     }
 
     handleSubmit = (e) => {
@@ -46,16 +51,35 @@ class Question extends Component {
     }
 
     render() {
-        const { id, userObj, optionOneText, optionTwoText, optionOneVotes, optionTwoVotes} = this.props
+        // if (! this.props.authedUser) { return <Redirect to={{
+        //         pathname: '/login',
+        //         state: {from: this.props.location.pathname}
+        // }} /> }
 
-        const classResultsOpt1 = this.state.answer === "optionOne" ? "selected" : "notselected"
-        const classResultsOpt2 = this.state.answer === "optionTwo" ? "selected" : "notselected"
+        // else if (! this.props.users) {return <Redirect to={`/refresh/${this.props.location.pathname}`}/> }
 
+        console.log("props: ", this.props)
+        const { id, users, questions} = this.props
+        const question = questions[id]
+        console.log("question: ", question)
+        const userObj = users[question.author]
+        const optionOneText = question ? question.optionOne.text : 'error'
+        const optionTwoText = question ? question.optionTwo.text : 'error'
+        const optionOneVotes = question.optionOne.votes.length
+        const optionTwoVotes = question.optionTwo.votes.length
+        let answer = null
+        //If user has answered the question, we updated the state to reflect their response
+        Object.keys(userObj.answers).includes(id) ?  answer = userObj.answers[id] : answer = null
+
+        const classResultsOpt1 = answer === "optionOne" ? "selected" : "notselected"
+        const classResultsOpt2 = answer === "optionTwo" ? "selected" : "notselected"
+        
         return (
             <>
                 <Label>
                     {
-                        this.state.answer
+                        // this.state.answer
+                        answer
                         ? <h4 className="question">Asked by {userObj.name}</h4>
                         : <h4 className="question">{userObj.name} asks:</h4>
                     }
@@ -68,8 +92,8 @@ class Question extends Component {
                     </ImageWrapper>
 
                     {
-                        this.state.answer
-
+                        // this.state.answer
+                        answer
                         ?
                             <DetailsWrapper>
                                 <p className="title">Results:</p>
@@ -77,7 +101,7 @@ class Question extends Component {
                                 <p> Would you rather...</p>
 
                                 <ResultsContainer className={classResultsOpt1}>
-                                    {this.state.answer === 'optionOne' && <YourVote>Your Vote</YourVote>}
+                                    {answer === 'optionOne' && <YourVote>Your Vote</YourVote>}
                                     {console.log('opt1text', optionOneText)}
                                     <p className="Q">{optionOneText}</p>
                                     <ResultsBar answered={optionOneVotes} total={(optionOneVotes+optionTwoVotes)} />
@@ -86,7 +110,7 @@ class Question extends Component {
                                 <Container><HR /><strong>OR</strong><HR /></Container>
 
                                 <ResultsContainer className={classResultsOpt2}>
-                                    {this.state.answer === 'optionTwo' && <YourVote>Your Vote</YourVote>}
+                                    {answer === 'optionTwo' && <YourVote>Your Vote</YourVote>}
                                     <p className="Q">{optionTwoText}</p>
                                     <ResultsBar answered={optionTwoVotes} total={(optionOneVotes+optionTwoVotes)} />
                                 </ResultsContainer>
@@ -129,20 +153,12 @@ class Question extends Component {
 
 function mapStateToProps( {authedUser, users, questions}, props) {
     const {id} = props.match.params
-    const question = questions[id]
         
     return {
         id,
         authedUser, 
         users, 
         questions,
-        userObj: users[question.author],
-        optionOneText: question ? question.optionOne.text : 'error',
-        optionTwoText: question ? question.optionTwo.text : 'error',
-        optionOneVotes: question.optionOne.votes.length,
-        optionTwoVotes: question.optionTwo.votes.length,
-
-
     }
 }
 
