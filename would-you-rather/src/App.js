@@ -54,7 +54,7 @@ class App extends Component {
           <Route exact path='/signup'><AddUser /></Route>
 
           <Route path='/refresh/:path'><Refresh /></Route>
-          <Route path="*"> <NotFound /> </Route>
+          <Route path="*" render={(props) => <NotFound {...props} /> }/>
 
 
         </Switch>

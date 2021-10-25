@@ -16,7 +16,7 @@ import {ResultsBar} from './sharedElements'
 import {withRouter} from 'react-router'
 import { connect } from 'react-redux'
 import { handleSaveAnswer } from '../actions/questions'
-// import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 class Question extends Component {
 
@@ -24,17 +24,7 @@ class Question extends Component {
         answer: null
     }
 
-    componentDidMount() {
-        // const { authedUser, users } = this.props
-        // const userObj = users[authedUser]
-        // const id = this.props.match.params.id
-        // //If user has answered the question, we updated the state to reflect their response
-        // Object.keys(userObj.answers).includes(id) && this.setState({answer: userObj.answers[id]})
-    
-        // if (! this.props.users) {return <Redirect to={`/refresh/${this.props.location.pathname}`}/> }
 
-    
-    }
 
     handleSubmit = (e) => {
         e.preventDefault()
@@ -51,18 +41,17 @@ class Question extends Component {
     }
 
     render() {
-        // if (! this.props.authedUser) { return <Redirect to={{
-        //         pathname: '/login',
-        //         state: {from: this.props.location.pathname}
-        // }} /> }
-
-        // else if (! this.props.users) {return <Redirect to={`/refresh/${this.props.location.pathname}`}/> }
-
         console.log("props: ", this.props)
-        const { id, users, questions} = this.props
+        const { id, users, questions, authedUser} = this.props
         const question = questions[id]
+        if (!question) {return <Redirect to={{
+            pathname: '/404',
+            state: {from: this.props.location.pathname,
+                    message: "There is no existing question with that id."}
+        }} />}
         console.log("question: ", question)
-        const userObj = users[question.author]
+        const userObj = users[authedUser]
+        const authorObj = users[question.author]
         const optionOneText = question ? question.optionOne.text : 'error'
         const optionTwoText = question ? question.optionTwo.text : 'error'
         const optionOneVotes = question.optionOne.votes.length
@@ -73,22 +62,22 @@ class Question extends Component {
 
         const classResultsOpt1 = answer === "optionOne" ? "selected" : "notselected"
         const classResultsOpt2 = answer === "optionTwo" ? "selected" : "notselected"
-        
+        console.log('answer: ', answer)
         return (
             <>
                 <Label>
                     {
                         // this.state.answer
                         answer
-                        ? <h4 className="question">Asked by {userObj.name}</h4>
-                        : <h4 className="question">{userObj.name} asks:</h4>
+                        ? <h4 className="question">Asked by {authorObj.name}</h4>
+                        : <h4 className="question">{authorObj.name} asks:</h4>
                     }
                 </Label>
 
                 <BottomWrapper>
 
                     <ImageWrapper>
-                        <UserImage userId={userObj.id} size={"120px"}/>
+                        <UserImage userId={authorObj.id} size={"120px"}/>
                     </ImageWrapper>
 
                     {
@@ -102,7 +91,6 @@ class Question extends Component {
 
                                 <ResultsContainer className={classResultsOpt1}>
                                     {answer === 'optionOne' && <YourVote>Your Vote</YourVote>}
-                                    {console.log('opt1text', optionOneText)}
                                     <p className="Q">{optionOneText}</p>
                                     <ResultsBar answered={optionOneVotes} total={(optionOneVotes+optionTwoVotes)} />
                                 </ResultsContainer>
