@@ -39,10 +39,10 @@ export function handleInitialData () {
 export function handleLoadFromSession () {
     return (dispatch) => {
         dispatch(showLoading())
-        const sessionUser = JSON.parse(localStorage.getItem('would-you-rather-authedUser'));
+        // const sessionUser = JSON.parse(localStorage.getItem('would-you-rather-authedUser'));
         const users = JSON.parse(localStorage.getItem('would-you-rather-users'));
         const questions = JSON.parse(localStorage.getItem('would-you-rather-questions'));
-        dispatch(signInSessionUser(sessionUser))
+        // dispatch(signInSessionUser(sessionUser))
         dispatch(receiveUsers(users))
         dispatch(receiveQuestions(questions))
         
